@@ -1,0 +1,140 @@
+/* Page de connexion */
+.login-page{
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Carte de connexion */
+.login-card{
+  width: 450px; /* Augmenté */
+  padding: 40px; /* Augmenté */
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95); /* Fond presque blanc pour la lisibilité */
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2); /* Ombre plus prononcée */
+  border: 1px solid rgba(118, 75, 162, 0.1); /* Bordure douce */
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* En-tête (Logo et Titre) */
+.login-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: var(--text);
+}
+
+.login-header h1 {
+  font-size: 2.2rem; /* Taille augmentée */
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: var(--accent); /* Couleur du dégradé pour le titre */
+}
+
+.login-header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Icône SVG */
+.medical-icon {
+  color: var(--primary); /* Couleur du dégradé pour le logo */
+}
+
+/* Groupe d'entrée avec icône */
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 0 10px;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+}
+
+.input-group:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(118, 75, 162, 0.2);
+  background: white;
+}
+
+.input-group svg {
+  color: var(--muted);
+  margin-right: 10px;
+}
+
+.login-card input{
+  flex-grow: 1;
+  padding: 12px 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: var(--text);
+  margin-bottom: 0; /* Retirer la marge par défaut pour le layout flex */
+}
+
+.login-card input::placeholder {
+    color: #a0a0a0;
+}
+
+/* Boutons d'action */
+.login-actions{
+  display:flex;
+  justify-content: center; /* Centrer le bouton */
+  margin-top: 30px;
+}
+
+.login-actions button{
+  /* Utilisation du dégradé de l'app pour le bouton de connexion */
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 1.05rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  width: 100%; /* Rendre le bouton large */
+  box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+}
+
+.login-actions button:hover:not(:disabled){
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(118, 75, 162, 0.4);
+}
+
+.login-actions button:disabled{
+  background: #ccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Messages d'erreur */
+.error-message {
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: var(--danger);
+  color: white;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsivité */
+@media (max-width: 500px) {
+  .login-card {
+    width: 90%;
+    margin: 20px;
+    padding: 25px;
+  }
+}

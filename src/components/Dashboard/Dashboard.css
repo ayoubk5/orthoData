@@ -1,0 +1,103 @@
+/* --- Shell et Conteneur Global --- */
+.dashboard-shell {
+  /* Assure que le contenu du dashboard prend toute la hauteur disponible pour le centrage */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Centre horizontalement le contenu */
+  justify-content: center;
+  /* Centre verticalement le contenu */
+
+  /* Augmentation du padding horizontal pour plus d'espace sur les bords */
+  padding: 0 50px;
+}
+
+/* --- Section Home (Actions) --- */
+.dashboard-home {
+  max-width: 1400px;
+  /* Largeur demandée */
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  position: relative;
+  text-align: center;
+}
+
+.dashboard-home h1 {
+  font-size: 38px;
+  margin-bottom: 30px;
+  font-weight: 800;
+  color: var(--accent);
+  text-shadow: 1px 1px 3px rgba(118, 75, 162, 0.2);
+}
+
+/* --- Conteneur des boutons --- */
+.dashboard-actions {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+/* --- Style des boutons / Cartes d'action --- */
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 200px;
+  height: 100px;
+  padding: 20px;
+
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+  border: 3px solid var(--accent);
+
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(118, 75, 162, 0.3);
+  color: var(--primary);
+}
+
+/* Style spécifique pour les icônes à l'intérieur des cartes (si vous en avez) */
+.card span {
+  font-size: 32px;
+  margin-bottom: 8px;
+}
+
+/* --- Responsivité --- */
+@media (max-width: 600px) {
+  .dashboard-shell {
+    padding: 0 10px;
+    /* Réduire le padding pour les très petits écrans */
+  }
+
+  .dashboard-home {
+    padding: 30px 20px;
+  }
+
+  .dashboard-actions {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .card {
+    width: 100%;
+    min-width: unset;
+    height: 100px;
+  }
+}

@@ -1,0 +1,73 @@
+@import './variables.css';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background-image: url('/HomeBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  -webkit-font-smoothing: antialiased;
+  color: var(--text);
+  position: relative;
+  min-height: 100vh;
+}
+
+/* Pour un effet parallaxe plus avancé */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/HomeBackground.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1;
+  /* Animation subtile au scroll */
+  will-change: transform;
+}
+
+/* Assure que le contenu est au-dessus du background */
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+/* app shell */
+.app-shell{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+/* header area handled by Header component */
+.app-main{
+  padding:28px;
+  flex:1;
+  overflow:auto;
+}
+
+/* loading */
+.loading-screen{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  color: white;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+}

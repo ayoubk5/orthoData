@@ -1,0 +1,133 @@
+.keywords-section {
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.keywords-title {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.keywords-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    background: #f8f9fa;
+    transition: border-color 0.2s;
+}
+
+.keywords-input-wrapper:focus-within {
+    border-color: #3498db;
+    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.1);
+}
+
+.search-icon {
+    color: #95a5a6;
+    margin-right: 8px;
+    display: flex;
+}
+
+.keywords-search-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    font-size: 0.95rem;
+    outline: none;
+    color: #333;
+}
+
+.add-new-btn {
+    background: #e1f5fe;
+    color: #0288d1;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.add-new-btn:hover {
+    background: #b3e5fc;
+}
+
+.keywords-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    margin-top: 5px;
+    padding: 0;
+    list-style: none;
+}
+
+.keywords-dropdown li {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background 0.2s;
+}
+
+.keywords-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.keywords-dropdown li:hover {
+    background: #f5f7fa;
+    color: #3498db;
+}
+
+.selected-keywords-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.keyword-tag {
+    background: #e8f4f8;
+    color: #2980b9;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid #bee3f8;
+}
+
+.remove-tag-btn {
+    background: none;
+    border: none;
+    color: #2980b9;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.remove-tag-btn:hover {
+    opacity: 1;
+    color: #c0392b;
+}

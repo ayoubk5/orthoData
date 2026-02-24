@@ -1,0 +1,39 @@
+.app-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 28px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    color: white;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.brand {
+    font-weight: 700;
+    cursor: pointer
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.user-name {
+    margin-right: 12px;
+    font-weight: 600
+}
+
+.btn-logout {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer
+}
+
+.btn-logout:hover {
+    background: rgba(255, 255, 255, 0.08)
+}

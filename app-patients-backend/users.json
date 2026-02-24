@@ -1,0 +1,362 @@
+[
+  {
+    "id": 1,
+    "username": "admin",
+    "password": "$2b$10$QJrDX1fvE5ShmNXlQzJfR.8TWjhUY2wabIdkozjjcwEJzDcAWfwOq",
+    "role": "admin",
+    "fullName": "Administrateur Principal",
+    "forcePasswordChange": false,
+    "realPassword": "admin123"
+  },
+  {
+    "id": 2,
+    "username": "medecin",
+    "password": "$2b$10$iyjvjcPnxELKavkntj1V0ugTIkW8fkEMUJfknprnJCA5k3XxnvbZm",
+    "role": "user",
+    "fullName": "Dr. Medecin Test",
+    "forcePasswordChange": true,
+    "realPassword": "medecin123"
+  },
+  {
+    "id": 5,
+    "username": "HYACOUBI",
+    "password": "$2b$10$EgJzoB9u5useznXOwAtnCOIcVlw18qyUnihcaeW71t8T2EsXuqkXW",
+    "role": "admin",
+    "fullName": "Pr. YACOUBI Hicham",
+    "forcePasswordChange": true,
+    "realPassword": "HYACOUBI123"
+  },
+  {
+    "id": 6,
+    "username": "ANAJIB",
+    "password": "$2b$10$fXOJck2yk/dAuWXlhVomDuzFEp0ha13tEN8/z543pORdL8L067RDC",
+    "role": "admin",
+    "fullName": "Pr. NAJIB AbdelJaouad",
+    "forcePasswordChange": false,
+    "realPassword": "APOLORAJA"
+  },
+  {
+    "id": 7,
+    "username": "ATEBBAA",
+    "password": "$2b$10$WDKIBQr4DsCnKsTRAUcPje9MoJNlK9rb.K5V68EuW6w273hW/y8va",
+    "role": "admin",
+    "fullName": "Pr. TEBBAA EL HASSALI Achraf",
+    "forcePasswordChange": true,
+    "realPassword": "ATEBBAA123"
+  },
+  {
+    "id": 8,
+    "username": "IELHAICHOUR",
+    "password": "$2b$10$a4w8nY8PotT/MbwxINTl9OMZMZI3lsg1h1cYk.YXOa9q5AHqLA8pq",
+    "role": "user",
+    "fullName": "Dr. EL HAICHOUR Ilyesse",
+    "forcePasswordChange": false,
+    "realPassword": "DrIlyesse123"
+  },
+  {
+    "id": 9,
+    "username": "MLAMZIRA",
+    "password": "$2b$10$syRfhL51pP485uUKk/ymz.NdE7RWUlt.evgedYy1o/9oiPnXElln2",
+    "role": "user",
+    "fullName": "Dr. LAMZIRA Mohammed",
+    "forcePasswordChange": true,
+    "realPassword": "MLAMZIRA123"
+  },
+  {
+    "id": 10,
+    "username": "SBENSALAH",
+    "password": "$2b$10$oxiVNKO3vE88BRIDU5rYReNd3uzUmq50jz2BoA17xyrnnEAfaAfg.",
+    "role": "user",
+    "fullName": "Dr. BEN SALAH Samir",
+    "forcePasswordChange": true,
+    "realPassword": "SBENSALAH123"
+  },
+  {
+    "id": 11,
+    "username": "SDARRAZ",
+    "password": "$2b$10$1DFTtOXsWeak9VKTJrtpAeFX29ZSg7DHnn2.b0KpsDgLXfVG51Afy",
+    "role": "user",
+    "fullName": "Dr. DARRAZ Sohayb",
+    "forcePasswordChange": true,
+    "realPassword": "SDARRAZ123"
+  },
+  {
+    "id": 12,
+    "username": "ABENABDELLAH",
+    "password": "$2b$10$ebJSdSPCpcyBHwX4imQ12.hdoXciggMIq7WSov7i8vCG.YLziqVkq",
+    "role": "user",
+    "fullName": "Dr. BENABDELLAH ayman",
+    "forcePasswordChange": true,
+    "realPassword": "ABENABDELLAH123"
+  },
+  {
+    "id": 13,
+    "username": "ZKHATAB",
+    "password": "$2b$10$lAWFwZLXDQJSalqJgXGLJeJTToLdvPbPG6QRDx0U7Ajy4RGPS7p1.",
+    "role": "user",
+    "fullName": "Dr. KHATAB zakaria",
+    "forcePasswordChange": true,
+    "realPassword": "ZKHATAB123"
+  },
+  {
+    "id": 14,
+    "username": "IALSOUDI",
+    "password": "$2b$10$DS4vmRRA5MfTnNztM2ViiO0OApckKGJn94Y3uhixroZ4ao.S2Ei2i",
+    "role": "user",
+    "fullName": "Dr. ALSOUDI Issa",
+    "forcePasswordChange": true,
+    "realPassword": "IALSOUDI123"
+  },
+  {
+    "id": 15,
+    "username": "KBENALIA",
+    "password": "$2b$10$0naBREkqLgFIV8.mQqh2aegXsnK6JvOPhjxtk8BIf/rn20QIAlHYm",
+    "role": "user",
+    "fullName": "Dr. BENALIA kamal",
+    "forcePasswordChange": true,
+    "realPassword": "KBENALIA123"
+  },
+  {
+    "id": 16,
+    "username": "ASEFTI",
+    "password": "$2b$10$39Grr4IXumML5QjLVgPBduLsmwO70VvW/vDWPZjJGmFaCDODZcXD2",
+    "role": "user",
+    "fullName": "Dr. SEFTI anas",
+    "forcePasswordChange": true,
+    "realPassword": "ASEFTI123"
+  },
+  {
+    "id": 17,
+    "username": "HHAWACHE",
+    "password": "$2b$10$mjLiWcZaFenHyZoF8Rmc7ed.7FGfMLf4edGKkhHro34VFnuqHNc2e",
+    "role": "user",
+    "fullName": "Dr. HAWACHE Hicham",
+    "forcePasswordChange": true,
+    "realPassword": "HHAWACHE123"
+  },
+  {
+    "id": 18,
+    "username": "AELFARHAOUI",
+    "password": "$2b$10$.yKA1wvSomw0lkdz9SmuSuAziYpKTEhu1BSnVQnwyoIivnhQiwQG6",
+    "role": "user",
+    "fullName": "Dr. EL FARHAOUI amine",
+    "forcePasswordChange": true,
+    "realPassword": "AELFARHAOUI123"
+  },
+  {
+    "id": 19,
+    "username": "YBATOU",
+    "password": "$2b$10$yqqVNKpj.lfeHaiUTgJ66u0C2ww.vR1SV0a8VWC1x8jonjPNg37Sq",
+    "role": "user",
+    "fullName": "Dr. BATOU Yassin",
+    "forcePasswordChange": true,
+    "realPassword": "YBATOU123"
+  },
+  {
+    "id": 20,
+    "username": "ABARZOUQ",
+    "password": "$2b$10$97Mwp5WBG61Q5U05RifJH.arewZjXmlSYRXK9lum35EfZvtK3kITO",
+    "role": "user",
+    "fullName": "Dr. BARZOUQ abdellilah",
+    "forcePasswordChange": true,
+    "realPassword": "ABARZOUQ123"
+  },
+  {
+    "id": 21,
+    "username": "HSALMI",
+    "password": "$2b$10$lQq.tnKuKGcQkY4LKjkmlOcvmdUzZDeYhLbCeEge.EskZ7duEBzg6",
+    "role": "user",
+    "fullName": "Dr. SALMI hatim",
+    "forcePasswordChange": true,
+    "realPassword": "HSALMI123"
+  },
+  {
+    "id": 22,
+    "username": "DMBAINANDARA",
+    "password": "$2b$10$uhFT2AO19OZBReuFxMquVu2C32lqz6./YGo7gR4NNKT24Yu1q6pFO",
+    "role": "user",
+    "fullName": "Dr. MBAINANDARA debonheur",
+    "forcePasswordChange": true,
+    "realPassword": "DMBAINANDARA123"
+  },
+  {
+    "id": 23,
+    "username": "HMARGOUM",
+    "password": "$2b$10$1Dx3/7J89VCvrOCfgcPkhenaTM/3pZx/ODB4BNynmTw2G5Um1llXy",
+    "role": "user",
+    "fullName": "Dr. MARGOUM hamza",
+    "forcePasswordChange": true,
+    "realPassword": "HMARGOUM123"
+  },
+  {
+    "id": 24,
+    "username": "SRIFAAI",
+    "password": "$2b$10$3hsOBkrR8KK9QgqhrpL0T.sGkoUhxCvqAC.qUbUSBK2/cGKheQbyS",
+    "role": "user",
+    "fullName": "Dr. RIFAAI Sami",
+    "forcePasswordChange": true,
+    "realPassword": "SRIFAAI123"
+  },
+  {
+    "id": 25,
+    "username": "ATARICHT",
+    "password": "$2b$10$u104PryScecqBsDsCg6gu./DuxOAO6UKI.5.CajsZOn1hK04keHhe",
+    "role": "user",
+    "fullName": "Dr. TARICHT anas",
+    "forcePasswordChange": true,
+    "realPassword": "ATARICHT123"
+  },
+  {
+    "id": 26,
+    "username": "SELMAZGALDI",
+    "password": "$2b$10$jhM9tUxuWE/391YgfKhs/.S9H/SQLW1f3K6vT71nvz9lPLpozRGti",
+    "role": "user",
+    "fullName": "Dr. ELMAZGALDI said",
+    "forcePasswordChange": true,
+    "realPassword": "SELMAZGALDI123"
+  },
+  {
+    "id": 27,
+    "username": "ASEBBAR",
+    "password": "$2b$10$XvGZ8BjKhw4ZpGiIHqxfw.L2NkH/3P/QXQbucYqpkMJQn7aA6J.nu",
+    "role": "admin",
+    "fullName": "Dr. SEBBAR Abdessabour",
+    "forcePasswordChange": false,
+    "realPassword": "Rzinia@1"
+  },
+  {
+    "id": 28,
+    "username": "BZERYOUH",
+    "password": "$2b$10$I.YeuLLqI65J4FYUwc6DyOrn4rATwZnZLOdBnuIrHoNibtLDAXe22",
+    "role": "user",
+    "fullName": "Dr. ZERYOUH brahim",
+    "forcePasswordChange": false,
+    "realPassword": "HOSIX"
+  },
+  {
+    "id": 29,
+    "username": "ALAABID",
+    "password": "$2b$10$NdsLifABW8mRV/bUHfzcZe7cQBjwIIz9CoaccvKD.LxO18xg0wI8u",
+    "role": "user",
+    "fullName": "Dr. LAABID ahmed",
+    "forcePasswordChange": false,
+    "realPassword": "Alaabid61"
+  },
+  {
+    "id": 30,
+    "username": "ONASSIRI",
+    "password": "$2b$10$bi.wytigVJfv5O1/DkAqW.QpBqCAzMfki.AaCCWu8EnvOmR5a2LW6",
+    "role": "user",
+    "fullName": "Dr. NASSIRI omar",
+    "forcePasswordChange": false,
+    "realPassword": "HOSIX"
+  },
+  {
+    "id": 31,
+    "username": "NBOULAICH",
+    "password": "$2b$10$Jj.FOv5lZ781D191s18S2uu1DDuD96wzeC3WETnS4r.PusG70d4Ci",
+    "role": "user",
+    "fullName": "Dr. BOULAICH noaim",
+    "forcePasswordChange": false,
+    "realPassword": "1998"
+  },
+  {
+    "id": 32,
+    "username": "HLAZAAR",
+    "password": "$2b$10$20zbGp9Y2csNnxeeA/fi5eLJXioqtO8HczFZGk4LgHikrbtf0UL3m",
+    "role": "user",
+    "fullName": "Dr. LAZAAR houssam",
+    "forcePasswordChange": false,
+    "realPassword": "LAZAR"
+  },
+  {
+    "id": 33,
+    "username": "HDAOUDI",
+    "password": "$2b$10$pVKYrGj6nkJ.zsq7VWYHiuKejbbaU6EGBT.sf1ZMaKF.u3o6QV4yG",
+    "role": "user",
+    "fullName": "Dr. DAOUDI houcine",
+    "forcePasswordChange": false,
+    "realPassword": "HDAOUDI1"
+  },
+  {
+    "id": 34,
+    "username": "KHILALI",
+    "password": "$2b$10$I9I01yTsy6EQAaqq0jqsi.TQU0UiCmCWbs.eeui57K88uO7wQ.J5C",
+    "role": "user",
+    "fullName": "Dr. ELHILALI khalid",
+    "forcePasswordChange": false,
+    "realPassword": "KHALID"
+  },
+  {
+    "id": 35,
+    "username": "AHALY",
+    "password": "$2b$10$2X7aNiGloyv4GBhocXqL0OEo.aF.aUfQFpeUeBsRO0Ib2WkL0ymBK",
+    "role": "user",
+    "fullName": "Dr. HALY Alae-eddine",
+    "forcePasswordChange": false,
+    "realPassword": "AHALY48"
+  },
+  {
+    "id": 36,
+    "username": "RBELFADIL",
+    "password": "$2b$10$6gX2IvHOumcHnRflA/PBke5xsHReJlaBr9Q4icih7BfXF6TOaU64i",
+    "role": "user",
+    "fullName": "Dr. BELFADIL reda",
+    "forcePasswordChange": false,
+    "realPassword": "GOAT1999"
+  },
+  {
+    "id": 37,
+    "username": "AKHERBACH",
+    "password": "$2b$10$ZlZmNLaC34H2.f2GUAJJBuzFqz6.QUNaoErK7nBHI4imUr7sRoqB6",
+    "role": "user",
+    "fullName": "Dr. KHERBACH achraf",
+    "forcePasswordChange": false,
+    "realPassword": "LERRAJL2007"
+  },
+  {
+    "id": 38,
+    "username": "AATIA",
+    "password": "$2b$10$iIOBy5Q4rJZHZGG3E84d3OLORd9JGh1cE/SpbfZFgJCsOvT2hkYt.",
+    "role": "user",
+    "fullName": "Dr. ATIA Alae",
+    "forcePasswordChange": false,
+    "realPassword": "lahbib1998"
+  },
+  {
+    "id": 39,
+    "username": "OCHALHE",
+    "password": "$2b$10$qWNgow/k8/TYQpcb49JMiu9eGps4hiUKPaCg9Vs57EkLZQwK8wJtO",
+    "role": "user",
+    "fullName": "Dr. CHALHE Ossama",
+    "forcePasswordChange": false,
+    "realPassword": "Ou06508906"
+  },
+  {
+    "id": 40,
+    "username": "Thesard",
+    "password": "$2b$10$hSlSrDtumjQsSJ8sBzxgR.LdsF3fGkaNFoVojMW/nj1xJnn3TgDpe",
+    "role": "thesard",
+    "fullName": "Thésard",
+    "forcePasswordChange": false,
+    "realPassword": "trauma123"
+  },
+  {
+    "id": 41,
+    "username": "secretaire",
+    "password": "$2b$10$/BAODfjEC5n.VN5kl52bdevgKW6F5r./G7y9e258YLXIqvf5LjKoy",
+    "role": "secretaire",
+    "fullName": "Secrétaire",
+    "forcePasswordChange": false,
+    "realPassword": "secret123"
+  },
+  {
+    "id": 42,
+    "username": "IBOUDRA",
+    "password": "$2b$10$cvHD7zR2Nrl/yN6ynROpNu92bcv1.zN8V8ssjOXeEiHTUbV/ov4Tm",
+    "role": "secretaire",
+    "fullName": "BOUDRA Ibtissam",
+    "forcePasswordChange": false,
+    "realPassword": "IBOUDRA123"
+  }
+]

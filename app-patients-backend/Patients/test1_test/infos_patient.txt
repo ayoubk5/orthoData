@@ -1,0 +1,19 @@
+Nom: test
+Prénom: test1
+Né le: 2000-01-01
+Âge: 26
+Adresse: Oujda
+Sexe: Homme
+Téléphone: 06548979854
+Téléphone2: 06584781521
+N° Dossier: F4574895
+Hôpital: CHU
+Chirurgien: Dr. BATOU Yassin
+Cin: FA195413
+Date de consultation: 2026-01-01
+Nom Opération: 
+--- Historique des Diagnostics ---
+
+--- Mots Clés ---
+Aucun
+Date de création: 06/01/2026 20:20:48

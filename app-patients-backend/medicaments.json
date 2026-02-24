@@ -1,0 +1,63 @@
+[
+  {
+    "category": "Anticoagulant",
+    "medicines": [
+      "HIBOR 3500 UI",
+      "REXABAN 10 mg cp"
+    ]
+  },
+  {
+    "category": "Anti-inflammatoires non stéroïdiens",
+    "medicines": [
+      "STORIXIA 60 mg cp"
+    ]
+  },
+  {
+    "category": "Antalgiques",
+    "medicines": [
+      "PARANTAL 1g cp",
+      "CO-PARANTAL 400mg/20mg",
+      "MYANTALGIC 37.5mg/325mg",
+      "TRAMADOL NORMON 50 mg gélule",
+      "ACETHIO",
+      "GABLINE 75 mg"
+    ]
+  },
+  {
+    "category": "Antibiotiques",
+    "medicines": [
+      "SPECTRUM 500 mg cp",
+      "IBERTIN 1g"
+    ]
+  },
+  {
+    "category": "IPP",
+    "medicines": [
+      "IXOR 20mg cp"
+    ]
+  },
+  {
+    "category": "Crème cicatrisante",
+    "medicines": []
+  },
+  {
+    "category": "Gel anti douleur",
+    "medicines": []
+  },
+  {
+    "category": "Anti-arthrosiques",
+    "medicines": [
+      "PIASCLEDINE 300 mg gélule "
+    ]
+  },
+  {
+    "category": "Fer",
+    "medicines": [
+      "BIOMARTIAL PLUS gélule "
+    ]
+  },
+  {
+    "category": "Thérapie froide",
+    "medicines": []
+  }
+]

@@ -1,0 +1,836 @@
+/* ========== PAGE WRAPPER ========== */
+.patients-section {
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.97);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+/* Header */
+.patients-header h2 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: var(--accent);
+}
+
+/* Bouton Retour */
+.back-button {
+    padding: 10px 16px;
+    background: var(--accent);
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.back-button:hover {
+    background: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* ==== Search & Actions ==== */
+.patients-controls {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.search-wrapper {
+    flex: 1;
+}
+
+.search-input {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    font-size: 16px;
+    color: black;
+}
+
+.refresh-button {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    padding: 14px 20px;
+    border-radius: 12px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.refresh-button:hover {
+    box-shadow: 0 4px 12px rgba(118, 75, 162, 0.4);
+    transform: translateY(-1px);
+}
+
+/* ==== Table ==== */
+.patients-table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.patients-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.patients-table thead {
+    background: var(--primary);
+    color: white;
+}
+
+.patients-table th,
+.patients-table td {
+    padding: 16px;
+    font-size: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: center;
+    vertical-align: middle;
+}
+
+/* Ajoutez ceci à PatientsList.css */
+
+.fc-btn {
+    background: #1abc9c;
+    /* Couleur Turquoise */
+    font-weight: bold;
+    font-size: 14px;
+    width: auto !important;
+    /* Pour afficher "FC" clairement */
+    padding: 0 10px;
+}
+
+.fc-btn:hover {
+    background: #16a085;
+    transform: scale(1.05);
+}
+
+.patient-row:hover {
+    background: #f1f5ff;
+}
+
+/* Dossier badge */
+.badge-dossier {
+    background: var(--accent);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+/* ==== ACTION BUTTONS ==== */
+.cell-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.view-btn {
+    background: #00cec9;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 12px;
+    /* 🔥 Square button with rounded corners */
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    /* Robot Color / Teal */
+}
+
+.edit-btn {
+    background: #f59e0b;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 12px;
+    /* 🔥 Square button with rounded corners */
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.delete-btn {
+    background: #fab1a0;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 12px;
+    /* 🔥 Square button with rounded corners */
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.folder-btn {
+    background: #6c5ce7;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 12px;
+    /* 🔥 Square button with rounded corners */
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.sp-btn {
+    background: #e17055;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 12px;
+    /* 🔥 Square button with rounded corners */
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    /* Override potential padding */
+}
+
+/* Messages d'erreur */
+.error-message {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: var(--danger);
+    color: white;
+    font-weight: 500;
+    text-align: center;
+}
+
+/* ========================================================
+   STYLES DES MODALES (Confirmation et Détails)
+   ======================================================== */
+.confirmation-modal,
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* --- Modale de Détails Spécifique --- */
+.patient-details-modal {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 15px;
+}
+
+.modal-header-details h2 {
+    font-size: 24px;
+    color: var(--primary);
+    margin: 0;
+}
+
+.modal-header-details .close-button {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--muted);
+    line-height: 1;
+    padding: 0;
+}
+
+/* --- Sections de Détails --- */
+.details-section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 10px;
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.section-title.primary {
+    color: var(--primary);
+}
+
+.section-title.accent {
+    color: var(--accent);
+}
+
+.details-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 10px;
+}
+
+.detail-item {
+    flex: 1 1 30%;
+    min-width: 150px;
+}
+
+.detail-item.full-width {
+    flex: 1 1 100%;
+}
+
+.detail-item label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.badge-dossier-large {
+    font-weight: 700;
+    color: white;
+    background: var(--accent);
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.observation-box {
+    white-space: pre-wrap;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.modal-footer {
+    text-align: right;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.close-button-footer {
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.close-button-footer:hover {
+    background: var(--primary);
+}
+
+/* --- Responsivité pour la modale --- */
+@media (max-width: 600px) {
+    .patient-details-modal {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .details-grid {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .detail-item {
+        min-width: 100%;
+    }
+}
+
+/* ========================================================
+   ADVANCED SEARCH STYLES
+   ======================================================== */
+.patients-controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.advanced-search-btn {
+    background: white;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+    padding: 14px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.advanced-search-btn:hover {
+    background: #f3f4f6;
+}
+
+.advanced-search-btn.active {
+    background: #e0e7ff;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.filter-input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    width: 250px;
+}
+
+.autocomplete-wrapper {
+    position: relative;
+}
+
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-top: 4px;
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-list li {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #333;
+    text-align: left;
+}
+
+.suggestions-list li:hover {
+    background: #f1f5f9;
+}
+
+
+.detail-item label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 4px;
+}
+
+.detail-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+    padding: 5px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.badge-dossier-large {
+    font-weight: 700;
+    color: white;
+    background: var(--accent);
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.observation-box {
+    white-space: pre-wrap;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.modal-footer {
+    text-align: right;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.close-button-footer {
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.close-button-footer:hover {
+    background: var(--primary);
+}
+
+/* --- Responsivité pour la modale --- */
+@media (max-width: 600px) {
+    .patient-details-modal {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .details-grid {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .detail-item {
+        min-width: 100%;
+    }
+}
+
+/* ========================================================
+   ADVANCED SEARCH STYLES
+   ======================================================== */
+.patients-controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.advanced-search-btn {
+    background: white;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+    padding: 14px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.advanced-search-btn:hover {
+    background: #f3f4f6;
+}
+
+.advanced-search-btn.active {
+    background: #e0e7ff;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.advanced-search-panel {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-start;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filter-group label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.filter-input {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    width: 250px;
+}
+
+.autocomplete-wrapper {
+    position: relative;
+}
+
+.suggestions-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    margin-top: 4px;
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions-list li {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    color: #333;
+    text-align: left;
+}
+
+.suggestions-list li:hover {
+    background: #f1f5f9;
+}
+
+.clear-filters-btn {
+    background: #fee2e2;
+    color: #ef4444;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s;
+    height: 42px;
+    margin-top: 29px;
+}
+
+.clear-filters-btn:hover {
+    background: #fecaca;
+}
+
+/* --- Multi-select Tags --- */
+.selected-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.filter-tag {
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.keyword-tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #bae6fd;
+}
+
+.diagnostic-tag {
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.remove-tag-icon {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+.remove-tag-icon:hover {
+    opacity: 1;
+    color: #ef4444;
+}
+
+.add-filter-btn {
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    color: #374151;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    margin-left: 8px;
+    transition: background 0.2s;
+}
+
+.add-filter-btn:hover:not(:disabled) {
+    background: #e5e7eb;
+}
+
+.add-filter-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* --- Download ZIP Button --- */
+.download-btn {
+    background: #6c5ce7;
+    /* Similar to folder button but maybe different shade? Let's use blue/purple or green */
+    background: #27ae60;
+    font-weight: bold;
+    font-size: 13px;
+    padding: 12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.download-btn:hover {
+    background: #2ecc71;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+}

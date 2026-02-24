@@ -1,0 +1,319 @@
+.form-layout {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    max-width: 1700px;
+    margin: 0 auto;
+}
+
+.form-column {
+    flex: 0 0 550px;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.side-column {
+    flex: 0 0 500px;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+
+
+.form-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.form-field {
+    flex: 1;
+}
+
+.form-field.full-width {
+    width: 100%;
+}
+
+.form-field label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+.buttons-row {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.button-create {
+    background: var(--primary);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- Correction Nature de Sortie --- */
+
+/* Le conteneur global des boutons */
+.nature-sortie-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    /* Espace vertical entre les options */
+    padding: 10px 0;
+    text-align: left;
+}
+
+/* Chaque ligne (Bouton + Texte) */
+.radio-option {
+    display: flex;
+    align-items: center;
+    /* Aligne le rond et le texte sur la même ligne */
+    gap: 10px;
+    /* Espace entre le rond et le texte */
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+/* Force la taille du rond radio pour qu'il ne soit pas étiré */
+.nature-sortie-container input[type="radio"] {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0 !important;
+    cursor: pointer;
+    box-shadow: none;
+    flex-shrink: 0;
+    /* Empêche le bouton de s'écraser */
+}
+
+/* Conteneur spécial pour la ligne Transfert */
+.transfert-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* Permet au champ texte de passer à la ligne sur mobile */
+    width: 100%;
+}
+
+/* Le champ texte "Lequel ?" */
+.input-transfert {
+    padding: 5px 10px !important;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px !important;
+    /* Largeur fixe pour faire propre */
+    height: 35px;
+}
+
+.button-cancel {
+    background: var(--danger);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.info-card {
+    padding: 12px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #eee;
+    color: var(--muted);
+}
+
+/* Container des dossiers avec scroll */
+.dossiers-container {
+    max-height: 600px;
+    overflow-y: auto;
+    padding: 0;
+}
+
+/* Style pour la scrollbar */
+.dossiers-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.dossiers-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+.dossiers-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+.dossiers-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Style pour le séparateur */
+.admission-separator {
+    margin: 25px 0 15px 0;
+    border-top: 2px solid #667eea;
+    padding-top: 20px;
+}
+
+.admission-title {
+    color: #667eea;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* Style pour l'espacement entre les admissions */
+.admission-item {
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #ddd;
+}
+
+.admission-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.cr-section {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+    text-align: center;
+    background: white;
+    /* Assure que le fond est blanc */
+    border-radius: 0 0 12px 12px;
+    /* Arrondir le bas */
+}
+
+.button-generate-cr {
+    background: #27ae60;
+    /* Vert pour indiquer le succès/génération */
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    width: 100%;
+    /* Prend toute la largeur disponible */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.3s ease;
+    box-shadow: 0 4px 6px rgba(39, 174, 96, 0.2);
+}
+
+.button-generate-cr:hover {
+    background: #219150;
+    transform: translateY(-1px);
+}
+
+.button-generate-cr:active {
+    transform: translateY(1px);
+}
+
+/* Le corps de la modale (plus large que l'admission) */
+.cr-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 0;
+    /* On gère le padding dans header/body/footer */
+    width: 90%;
+    max-width: 800px;
+    /* Assez large pour 2 colonnes */
+    max-height: 90vh;
+    /* Pour éviter que ça dépasse l'écran */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+.cr-modal-header {
+    padding: 20px 25px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cr-modal-header h3 {
+    margin: 0;
+    color: #27ae60;
+    /* Vert pour rappeler le bouton générer */
+    font-size: 20px;
+}
+
+.cr-modal-body {
+    padding: 25px;
+    overflow-y: auto;
+    /* Scroll si trop de champs */
+    flex: 1;
+}
+
+/* Grille pour les champs du CR */
+.cr-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* 2 colonnes */
+    gap: 15px;
+}
+
+.cr-field-full {
+    grid-column: 1 / -1;
+    /* Prend toute la largeur */
+}
+
+.cr-modal-footer {
+    padding: 20px 25px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    background: #f9f9f9;
+    border-radius: 0 0 12px 12px;
+}
+
+/* Titres de sections dans la modale */
+.cr-section-title {
+    grid-column: 1 / -1;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 5px;
+}
+
+.input-readonly {
+    background-color: #f5f5f5;
+    color: #666;
+    cursor: not-allowed;
+    border-color: #e0e0e0;
+}

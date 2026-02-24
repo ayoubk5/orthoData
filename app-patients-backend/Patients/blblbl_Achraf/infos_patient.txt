@@ -1,0 +1,19 @@
+Nom: Achraf
+Prénom: blblbl
+Né le: 2000-10-01
+Âge: 25
+Adresse: Oujda
+Sexe: Homme
+Téléphone: 06548979854
+Téléphone2: 06584781521
+N° Dossier: F4574895
+Hôpital: CHU
+Chirurgien: Pr. YACOUBI Hicham
+Cin: FA195413
+Date de consultation: 2026-01-06
+Nom Opération: 
+--- Historique des Diagnostics ---
+
+--- Mots Clés ---
+Aucun
+Date de création: 06/01/2026 20:23:51

@@ -1,0 +1,139 @@
+/* Modal d'admission */
+.admission-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Conteneur de chaque ligne de diagnostic */
+.diag-entry {
+  display: flex; /* Active l'alignement horizontal */
+  align-items: center; /* Centre verticalement les éléments */
+  gap: 10px; /* Espace entre la date, le texte et le bouton */
+  margin-bottom: 10px; /* Espace sous chaque ligne */
+  background: #f8f9fa; /* Fond léger pour détacher la ligne (optionnel) */
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Style de l'input date */
+.diag-entry input[type="date"] {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  height: 40px; /* Hauteur fixe pour l'alignement */
+  box-sizing: border-box;
+}
+
+/* Style du textarea pour qu'il prenne la place restante */
+.diag-entry textarea {
+  flex: 1; /* Prend tout l'espace disponible au milieu */
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  resize: none; /* Empêche le redimensionnement manuel qui casse le design */
+  height: 40px; /* Même hauteur que la date */
+  line-height: 20px; /* Centre le texte */
+  box-sizing: border-box;
+  overflow: hidden; /* Cache la barre de défilement si pas nécessaire */
+}
+
+/* Style du bouton supprimer */
+.diag-entry .delete-btn {
+  background-color: #ff4d4f;
+  color: white;
+  border: none;
+  width: 40px; /* Carré */
+  height: 40px; /* Carré */
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.diag-entry .delete-btn:hover {
+  background-color: #ff7875;
+}
+
+.diag-entry .delete-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.admission-modal {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.admission-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+.admission-modal-header h3 {
+    margin: 0;
+    color: #667eea;
+    font-size: 22px;
+}
+
+.close-modal-btn {
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.close-modal-btn:hover {
+    color: #333;
+}
+
+.admission-modal-body {
+    margin-bottom: 20px;
+}
+
+.admission-field label {
+    font-weight: 600;
+    color: #333;
+    display: block;
+}
+
+.admission-modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}

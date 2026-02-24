@@ -1,0 +1,218 @@
+/* Synchronisation avec PatientsList.css pour la largeur et le style général */
+.users-section {
+    max-width: 1400px;
+    margin: 30px auto; /* Centrage */
+    padding: 25px; /* Augmenté pour correspondre à PatientsList */
+    border-radius: 12px;
+    background: rgba(255,255,255,0.97); /* Utilisation de la couleur de fond de l'application */
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    position: relative; /* Nécessaire pour les modales */
+}
+
+.back-button{
+    padding:8px 14px;
+    background:var(--accent); /* Harmonisation de la couleur */
+    color:white;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    margin-bottom:12px;
+    transition: background 0.3s;
+}
+.back-button:hover {
+    background: var(--primary);
+}
+
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px; /* Augmenté pour correspondre au style général */
+}
+.section-header h2 {
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--accent); /* Harmonisation de la couleur du titre */
+}
+
+.section-actions {
+    display: flex;
+    gap: 10px;
+}
+
+/* Styles pour le formulaire d'ajout d'utilisateur */
+.add-user-form{
+    display:flex;
+    gap:8px;
+    margin-bottom:20px;
+    padding: 15px;
+    border: 1px dashed #ddd;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+.add-user-form input, .add-user-form select{
+    padding:10px; /* Augmenté */
+    border-radius:8px;
+    border:1px solid #e6e6e6;
+    flex: 1;
+}
+
+.add-user-form button[type="submit"] {
+    background: var(--success);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Messages d'erreur */
+.error-message {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: var(--danger);
+    color: white;
+    font-weight: 500;
+    text-align: center;
+}
+.empty-state-list {
+    text-align: center;
+    padding: 50px;
+    color: var(--muted);
+    font-style: italic;
+}
+
+
+/* Styles pour les boutons d'action (Ajouter/Actualiser) */
+.refresh-button {
+    background: var(--primary);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+    transition: opacity 0.3s;
+}
+.add-user-button {
+    background: var(--accent);
+    color: white;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+.refresh-button:hover, .add-user-button:hover {
+    opacity: 0.9;
+}
+
+
+/* Grille des utilisateurs */
+.users-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); /* Légèrement plus large pour chaque carte */
+    gap:15px; /* Augmenté */
+    margin-top: 20px;
+    max-width: 1500px;
+}
+.user-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:15px;
+    border-radius:12px;
+    background:white;
+    box-shadow:0 6px 18px rgba(0,0,0,0.05);
+    border: 1px solid #eee;
+}
+.user-avatar{
+    font-size:32px; /* Agrandissement des icônes */
+    flex-shrink: 0;
+}
+.user-info h3 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text);
+}
+.user-info p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+.user-actions{
+    margin-left: auto;
+    flex-shrink: 0;
+}
+.action-btn{
+    padding:8px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+    width: 34px;
+    height: 34px;
+}
+.delete-btn{
+    background:var(--danger);
+    color:white;
+}
+
+/* ============ MODALE DE CONFIRMATION (NOUVEAU) ============ */
+.confirmation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content p {
+    margin-bottom: 25px;
+    font-size: 16px;
+    color: var(--text);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+}
+
+.button-cancel, .button-delete {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: opacity 0.2s;
+}
+
+.button-cancel {
+    background: #ccc;
+    color: var(--text);
+}
+
+.button-delete {
+    background: var(--danger);
+    color: white;
+}

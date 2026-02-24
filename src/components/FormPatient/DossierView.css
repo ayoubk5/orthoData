@@ -1,0 +1,54 @@
+.dossier-item {
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.dossier-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+
+.upload-btn {
+    background: var(--primary);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.upload-btn:hover {
+    background: var(--accent);
+}
+
+.upload-btn.small {
+    padding: 8px 10px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.hidden-file-input {
+    position: absolute;
+    left: -9999px;
+}
+
+.sub-list {
+    display: flex;
+    gap: 12px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.centered-sub-list {
+    justify-content: center;
+}
