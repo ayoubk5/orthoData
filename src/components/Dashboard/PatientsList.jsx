@@ -3,6 +3,7 @@ import { Filter, X, Search } from 'lucide-react';
 import './PatientsList.css';
 import { MOCK_KEYWORDS } from '../../constants/keywords';
 import DiagnosticAutocomplete from '../Shared/DiagnosticAutocomplete';
+import { API_URL } from '../../config';
 
 // =======================================================
 // Composant interne pour afficher les détails du patient
@@ -148,14 +149,14 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
   const handleOpenFolder = async (patient) => {
     const folderName = `${patient.prenom}_${patient.nom}`;
     const safeFolderName = encodeURIComponent(folderName);
-    const explorerUrl = `http://10.4.28.11:5000/explorer/${safeFolderName}/`;
+    const explorerUrl = `${API_URL}/explorer/${safeFolderName}/`;
     try {
       const token = localStorage.getItem('token');
       // On sécurise le nom du dossier comme dans le backend
       const folderName = `${patient.prenom}_${patient.nom}`;
       console.log("📂 Tentative récupération chemin:", folderName);
 
-      const res = await fetch('http://10.4.28.11:5000/api/open-folder', {
+      const res = await fetch(`${API_URL}/api/open-folder`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -229,7 +230,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const token = localStorage.getItem('token');
       console.log("📄 Demande de génération du document...");
 
-      const res = await fetch('http://10.4.28.11:5000/api/generate-document', {
+      const res = await fetch(`${API_URL}/api/generate-document`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -280,7 +281,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const token = localStorage.getItem('token');
       console.log("📄 Demande de génération SP pour:", selectedSPPatient.nom);
 
-      const res = await fetch('http://10.4.28.11:5000/api/generate-sortie-provisoire', {
+      const res = await fetch(`${API_URL}/api/generate-sortie-provisoire`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -328,7 +329,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const token = localStorage.getItem('token');
       const folderName = `${patientToDelete.prenom}_${patientToDelete.nom}`;
 
-      const res = await fetch(`http://10.4.28.11:5000/api/patients/${folderName}`, {
+      const res = await fetch(`${API_URL}/api/patients/${folderName}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -356,7 +357,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const folderName = `${patient.prenom}_${patient.nom}`;
       const token = localStorage.getItem('token');
 
-      const res = await fetch(`http://10.4.28.11:5000/api/download-folder?folderName=${folderName}`, {
+      const res = await fetch(`${API_URL}/api/download-folder?folderName=${folderName}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -385,7 +386,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const folderName = `${patient.prenom}_${patient.nom}`;
       const token = localStorage.getItem('token');
 
-      const res = await fetch(`http://10.4.28.11:5000/api/download-last-cr?folderName=${folderName}`, {
+      const res = await fetch(`${API_URL}/api/download-last-cr?folderName=${folderName}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 

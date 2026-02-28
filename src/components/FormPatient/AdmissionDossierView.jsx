@@ -1,5 +1,6 @@
 import React from 'react';
 import './DossierView.css';
+import { API_URL } from '../../config';
 
 const AdmissionDossierView = ({ patientFolderName, admissionFolder, onDelete, onGenerateCR, onGenerateConsent, onGenerateFC }) => {
   const folders = [
@@ -29,13 +30,13 @@ const AdmissionDossierView = ({ patientFolderName, admissionFolder, onDelete, on
       if (sub) form.append('targetSubFolder', sub);
 
       try {
-        const res = await fetch('http://10.4.28.11:5000/api/upload-admission-file', {
+        const res = await fetch(`${API_URL}/api/upload-admission-file`, {
           method: 'POST',
           body: form,
           headers: { Authorization: `Bearer ${token}` }
         });
         const data = await res.json();
-        
+
         if (data.success) {
           console.log(`[Upload Admission] Fichier ${file.name} téléversé avec succès.`);
           successCount++;
@@ -68,7 +69,7 @@ const AdmissionDossierView = ({ patientFolderName, admissionFolder, onDelete, on
 
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch('http://10.4.28.11:5000/api/delete-admission', {
+      const res = await fetch(`${API_URL}/api/delete-admission`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

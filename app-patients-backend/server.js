@@ -42,6 +42,10 @@ const TEMPLATE_CONSENT_PATH = path.join(__dirname, 'templates', 'consent.docx');
 const USERS_FILE = path.join(__dirname, 'users.json');
 // Fichier pour stocker les logs de suppression
 const DELETED_LOGS_FILE = path.join(__dirname, 'deleted_logs.json');
+// Fichier pour les statistiques des médicaments
+const MEDICAMENT_STATS_FILE = path.join(__dirname, 'medicament_stats.json');
+// Fichier pour le programme opératoire
+const PROGRAMME_FILE = path.join(__dirname, 'programme_operatoire.json');
 const { generateGalleryHTML } = require('./galleryTemplate');
 const serveIndex = require('serve-index'); // Gardé si besoin en fallback ou supprimé si non utilisé
 
@@ -2163,9 +2167,120 @@ app.post('/api/generate-ordonnance', authenticateToken, async (req, res) => {
         res.setHeader('Content-Disposition', `attachment; filename="${fileName}"`);
         res.send(buf);
 
+        // 📊 Tracking usage des médicaments
+        try {
+            let stats = {};
+            if (fs.existsSync(MEDICAMENT_STATS_FILE)) {
+                stats = JSON.parse(fs.readFileSync(MEDICAMENT_STATS_FILE, 'utf8'));
+            }
+            medicinesList.forEach(m => {
+                const name = (m.name || '').trim().toUpperCase();
+                if (name) stats[name] = (stats[name] || 0) + 1;
+            });
+            fs.writeFileSync(MEDICAMENT_STATS_FILE, JSON.stringify(stats, null, 2));
+        } catch (statsErr) {
+            console.error('Erreur tracking médicaments:', statsErr);
+        }
+
     } catch (error) {
         console.error("Erreur génération Ordonnance:", error);
         res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// ----------------------------------------------------------------
+// ROUTE STATISTIQUES MÉDICAMENTS
+// ----------------------------------------------------------------
+
+app.get('/api/medicaments/stats', authenticateToken, (req, res) => {
+    try {
+        if (!fs.existsSync(MEDICAMENT_STATS_FILE)) {
+            return res.json({ success: true, stats: [] });
+        }
+        const raw = JSON.parse(fs.readFileSync(MEDICAMENT_STATS_FILE, 'utf8'));
+        const stats = Object.entries(raw)
+            .map(([name, count]) => ({ name, count }))
+            .sort((a, b) => b.count - a.count);
+        res.json({ success: true, stats });
+    } catch (error) {
+        console.error('Erreur stats médicaments:', error);
+        res.status(500).json({ success: false, error: error.message });
+    }
+});
+
+// ----------------------------------------------------------------
+// ROUTES PROGRAMME OPÉRATOIRE
+// ----------------------------------------------------------------
+
+const readProgramme = () => {
+    if (!fs.existsSync(PROGRAMME_FILE)) return [];
+    try { return JSON.parse(fs.readFileSync(PROGRAMME_FILE, 'utf8')); } catch { return []; }
+};
+const writeProgramme = (rows) => fs.writeFileSync(PROGRAMME_FILE, JSON.stringify(rows, null, 2));
+
+app.get('/api/programme-operatoire', authenticateToken, requireAdmin, (req, res) => {
+    try {
+        res.json({ success: true, rows: readProgramme() });
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
+app.post('/api/programme-operatoire', authenticateToken, requireAdmin, (req, res) => {
+    try {
+        const rows = readProgramme();
+        const newRow = {
+            id: Date.now(),
+            date: req.body.date || new Date().toISOString().slice(0, 10),
+            nomPrenom: (req.body.nomPrenom || '').toUpperCase(),
+            diagnostic: req.body.diagnostic || '',
+            gesteOperatoire: req.body.gesteOperatoire || '',
+            couvertureSanitaire: req.body.couvertureSanitaire || '',
+            observation: req.body.observation || '',
+            prof: req.body.prof || '',
+            createdAt: new Date().toISOString()
+        };
+        rows.unshift(newRow);
+        writeProgramme(rows);
+        res.json({ success: true, row: newRow });
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
+app.put('/api/programme-operatoire/:id', authenticateToken, requireAdmin, (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const rows = readProgramme();
+        const idx = rows.findIndex(r => r.id === id);
+        if (idx === -1) return res.status(404).json({ success: false, error: 'Entrée introuvable' });
+        const updated = {
+            ...rows[idx],
+            date: req.body.date || rows[idx].date,
+            nomPrenom: (req.body.nomPrenom || rows[idx].nomPrenom).toUpperCase(),
+            diagnostic: req.body.diagnostic ?? rows[idx].diagnostic,
+            gesteOperatoire: req.body.gesteOperatoire ?? rows[idx].gesteOperatoire,
+            couvertureSanitaire: req.body.couvertureSanitaire ?? rows[idx].couvertureSanitaire,
+            observation: req.body.observation ?? rows[idx].observation,
+            prof: req.body.prof ?? rows[idx].prof,
+            updatedAt: new Date().toISOString()
+        };
+        rows[idx] = updated;
+        writeProgramme(rows);
+        res.json({ success: true, row: updated });
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
+    }
+});
+
+app.delete('/api/programme-operatoire/:id', authenticateToken, requireAdmin, (req, res) => {
+    try {
+        const id = parseInt(req.params.id);
+        const rows = readProgramme().filter(r => r.id !== id);
+        writeProgramme(rows);
+        res.json({ success: true });
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message });
     }
 });
 

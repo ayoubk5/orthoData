@@ -5,7 +5,10 @@ import UsersList from '../UsersList/UsersList.jsx';
 import CertificateModal from './CertificateModal.jsx';
 import FeuilleSoinModal from './FeuilleSoinModal.jsx';
 import MedicamentManager from './MedicamentManager.jsx';
+import MedicamentStats from './MedicamentStats.jsx';
+import ProgrammeOperatoire from './ProgrammeOperatoire.jsx';
 import OrdonnanceModal from './OrdonnanceModal.jsx';
+import { API_URL } from '../../config';
 
 const Dashboard = ({ user, onNavigate, onEditPatient }) => {
   const [activeTab, setActiveTab] = useState('home');
@@ -21,7 +24,7 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://10.4.28.11:5000/api/patients', {
+      const res = await fetch(`${API_URL}/api/patients`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -39,7 +42,7 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
     setLoading(true);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://10.4.28.11:5000/api/users', {
+      const res = await fetch(`${API_URL}/api/users`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -56,7 +59,7 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
     if (user.role !== 'admin') return;
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://10.4.28.11:5000/api/stats', {
+      const res = await fetch(`${API_URL}/api/stats`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
@@ -126,6 +129,26 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
                 style={{ background: '#6c5ce7', color: 'white' }}
               >
                 💉 Config. Médicaments
+              </button>
+            )}
+
+            {user.role === 'admin' && (
+              <button
+                className="card"
+                onClick={() => setActiveTab('programme')}
+                style={{ background: 'linear-gradient(135deg, #0f3460, #16213e)', color: 'white' }}
+              >
+                🗓️ Programme Opératoire
+              </button>
+            )}
+
+            {['admin', 'user'].includes(user.role) && (
+              <button
+                className="card"
+                onClick={() => setActiveTab('medstats')}
+                style={{ background: '#00b894', color: 'white' }}
+              >
+                📊 Stats Médicaments
               </button>
             )}
 
@@ -227,6 +250,18 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
 
       {activeTab === 'medicaments' && user.role === 'admin' && (
         <MedicamentManager
+          onBack={() => setActiveTab('home')}
+        />
+      )}
+
+      {activeTab === 'medstats' && (
+        <MedicamentStats
+          onBack={() => setActiveTab('home')}
+        />
+      )}
+
+      {activeTab === 'programme' && user.role === 'admin' && (
+        <ProgrammeOperatoire
           onBack={() => setActiveTab('home')}
         />
       )}

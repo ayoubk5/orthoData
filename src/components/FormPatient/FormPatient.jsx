@@ -7,6 +7,7 @@ import MultiSelectActes from './MultiSelectActes';
 import MultiSelectSurgeons from './MultiSelectSurgeons';
 import './FormPatient.css';
 import { SURGEONS_LIST } from '../../constants/surgeonsList';
+import { API_URL } from '../../config';
 
 const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
     const [formData, setFormData] = useState({
@@ -90,7 +91,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
             const loadConsultationFolders = async () => {
                 try {
                     const token = localStorage.getItem('token');
-                    const res = await fetch(`http://10.4.28.11:5000/api/get-consultation-folders?patientFolder=${folderName}`, {
+                    const res = await fetch(`${API_URL}/api/get-consultation-folders?patientFolder=${folderName}`, {
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     const data = await res.json();
@@ -106,7 +107,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
             const loadAdmissionFolders = async () => {
                 try {
                     const token = localStorage.getItem('token');
-                    const res = await fetch(`http://10.4.28.11:5000/api/get-admission-folders?patientFolder=${folderName}`, {
+                    const res = await fetch(`${API_URL}/api/get-admission-folders?patientFolder=${folderName}`, {
                         headers: { Authorization: `Bearer ${token}` }
                     });
                     const data = await res.json();
@@ -176,7 +177,9 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => {
-            const newData = { ...prev, [name]: value };
+            // Auto-uppercase nom and prenom
+            const finalValue = (name === 'nom' || name === 'prenom') ? value.toUpperCase() : value;
+            const newData = { ...prev, [name]: finalValue };
             if (name === 'neLe') {
                 const birthDate = new Date(value);
                 const today = new Date();
@@ -203,7 +206,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
         if (!createdFolder) return;
         try {
             const token = localStorage.getItem('token');
-            const response = await fetch('http://10.4.28.11:5000/api/open-folder', {
+            const response = await fetch(`${API_URL}/api/open-folder`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -215,7 +218,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
             if (response.ok) {
                 // Ouvrir le dossier dans l'explorateur web du serveur
                 // On utilise l'URL du serveur configurée
-                window.open(`http://10.4.28.11:5000/explorer/${createdFolder}`, '_blank');
+                window.open(`${API_URL}/explorer/${createdFolder}`, '_blank');
             } else {
                 const data = await response.json();
                 alert(`Impossible d'ouvrir le dossier: ${data.message || 'Erreur inconnue'}`);
@@ -242,8 +245,8 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
         try {
             const token = localStorage.getItem('token');
             const endpoint = mode === 'create'
-                ? 'http://10.4.28.11:5000/api/patients/create'
-                : 'http://10.4.28.11:5000/api/patients/update';
+                ? `${API_URL}/api/patients/create`
+                : `${API_URL}/api/patients/update`;
 
             const payload = { ...formData };
 
@@ -300,7 +303,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
             const formattedDate = formatDateToDDMMYYYY(admissionData.date);
             const admissionFolder = `Admission_${formattedDate}`;
 
-            const res = await fetch('http://10.4.28.11:5000/api/create-admission', {
+            const res = await fetch(`${API_URL}/api/create-admission`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -337,7 +340,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
             const token = localStorage.getItem('token');
             const consultationFolder = `Consultation_${formattedDate}`;
 
-            const res = await fetch('http://10.4.28.11:5000/api/create-consultation', {
+            const res = await fetch(`${API_URL}/api/create-consultation`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -372,7 +375,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
 
         try {
             const token = localStorage.getItem('token');
-            let url = `http://10.4.28.11:5000/api/get-cr-data?patientFolder=${createdFolder}`;
+            let url = `${API_URL}/api/get-cr-data?patientFolder=${createdFolder}`;
             if (admissionFolder) {
                 url += `&admissionFolder=${admissionFolder}`;
             }
@@ -448,7 +451,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
                         motsCles: formData.motsCles
                     };
 
-                    await fetch('http://10.4.28.11:5000/api/patients/update', {
+                    await fetch(`${API_URL}/api/patients/update`, {
                         method: 'PUT',
                         headers: {
                             'Content-Type': 'application/json',
@@ -474,7 +477,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
                 nomOperation: crData.nomOperation
             };
 
-            const res = await fetch('http://10.4.28.11:5000/api/generate-document', {
+            const res = await fetch(`${API_URL}/api/generate-document`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -534,7 +537,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
                 chirurgien: crData.chirurgien
             };
 
-            const res = await fetch('http://10.4.28.11:5000/api/generate-consent', {
+            const res = await fetch(`${API_URL}/api/generate-consent`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -583,7 +586,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
 
             let crDataLoaded = {};
             try {
-                let url = `http://10.4.28.11:5000/api/get-cr-data?patientFolder=${createdFolder}`;
+                let url = `${API_URL}/api/get-cr-data?patientFolder=${createdFolder}`;
                 if (selectedAdmissionFolder) {
                     url += `&admissionFolder=${selectedAdmissionFolder}`;
                 }
@@ -608,7 +611,7 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
                 admissionFolder: selectedAdmissionFolder || null
             };
 
-            const res = await fetch('http://10.4.28.11:5000/api/generate-fiche-confidentielle', {
+            const res = await fetch(`${API_URL}/api/generate-fiche-confidentielle`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

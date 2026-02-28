@@ -4,6 +4,7 @@ import Login from "./components/Login/Login.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import FormPatient from "./components/FormPatient/FormPatient.jsx";
 import './styles/global.css';
+import { API_URL } from './config';
 
 export default function App() {
   const [user, setUser] = useState(null);
@@ -30,7 +31,7 @@ export default function App() {
 
     // 2. Vérification serveur en arrière-plan
     if (token) {
-      fetch('http://10.4.28.11:5000/api/auth/verify', {
+      fetch(`${API_URL}/api/auth/verify`, {
         headers: { Authorization: `Bearer ${token}` }
       })
         .then(r => r.json())

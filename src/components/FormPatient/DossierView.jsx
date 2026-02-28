@@ -1,5 +1,6 @@
 import React from 'react';
 import './DossierView.css';
+import { API_URL } from '../../config';
 
 const DossierView = ({ patientName, patientFolderName, onGenerateCR, onGenerateConsent, onGenerateFC, consultationFolders = [] }) => {
   // Définition des dossiers
@@ -29,7 +30,7 @@ const DossierView = ({ patientName, patientFolderName, onGenerateCR, onGenerateC
       if (sub) form.append('targetSubFolder', sub);
 
       try {
-        const res = await fetch('http://10.4.28.11:5000/api/upload-file', {
+        const res = await fetch(`${API_URL}/api/upload-file`, {
           method: 'POST',
           body: form,
           headers: { Authorization: `Bearer ${token}` }
@@ -79,7 +80,7 @@ const DossierView = ({ patientName, patientFolderName, onGenerateCR, onGenerateC
       if (sub) form.append('targetSubFolder', sub);
 
       try {
-        const res = await fetch('http://10.4.28.11:5000/api/upload-file', {
+        const res = await fetch(`${API_URL}/api/upload-file`, {
           method: 'POST',
           body: form,
           headers: { Authorization: `Bearer ${token}` }
