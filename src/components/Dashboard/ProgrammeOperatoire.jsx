@@ -158,7 +158,8 @@ const EMPTY_ROW = (prof = '') => ({
     prof,
 });
 
-const ProgrammeOperatoire = ({ onBack }) => {
+const ProgrammeOperatoire = ({ onBack, user }) => {
+    const isAdmin = user?.role === 'admin';
     const [rows, setRows] = useState([]);
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState('');
@@ -290,19 +291,21 @@ const ProgrammeOperatoire = ({ onBack }) => {
                 </div>
             </div>
 
-            {/* Prof Buttons */}
-            <div className="po-prof-btns">
-                {PROFS.map(prof => (
-                    <button
-                        key={prof}
-                        className="po-prof-btn"
-                        style={{ background: PROF_COLORS[prof] }}
-                        onClick={() => handleAddRow(prof)}
-                    >
-                        ➕ {prof}
-                    </button>
-                ))}
-            </div>
+            {/* Prof Buttons – admin only */}
+            {isAdmin && (
+                <div className="po-prof-btns">
+                    {PROFS.map(prof => (
+                        <button
+                            key={prof}
+                            className="po-prof-btn"
+                            style={{ background: PROF_COLORS[prof] }}
+                            onClick={() => handleAddRow(prof)}
+                        >
+                            ➕ {prof}
+                        </button>
+                    ))}
+                </div>
+            )}
 
             {/* Search + Filter */}
             <div className="po-toolbar">
@@ -340,16 +343,18 @@ const ProgrammeOperatoire = ({ onBack }) => {
                                 <th>Couverture Sanitaire</th>
                                 <th>Observation</th>
                                 <th>Professeur</th>
-                                <th>Actions</th>
+                                {isAdmin && <th>Actions</th>}
                             </tr>
                         </thead>
                         <tbody>
                             {filtered.length === 0 ? (
                                 <tr>
-                                    <td colSpan={8} className="po-empty-row">
+                                    <td colSpan={isAdmin ? 8 : 7} className="po-empty-row">
                                         {search || profFilter
                                             ? 'Aucun résultat trouvé.'
-                                            : 'Aucune entrée. Cliquez sur un professeur pour commencer.'}
+                                            : isAdmin
+                                                ? 'Aucune entrée. Cliquez sur un professeur pour commencer.'
+                                                : 'Aucune entrée enregistrée.'}
                                     </td>
                                 </tr>
                             ) : filtered.map(row => {
@@ -394,34 +399,36 @@ const ProgrammeOperatoire = ({ onBack }) => {
                                                 {row.prof || '—'}
                                             </span>
                                         </td>
-                                        {/* Actions */}
-                                        <td className="po-cell-actions">
-                                            {locked ? (
+                                        {/* Actions – admin only */}
+                                        {isAdmin && (
+                                            <td className="po-cell-actions">
+                                                {locked ? (
+                                                    <button
+                                                        className="po-edit-btn"
+                                                        onClick={() => handleEdit(rowId)}
+                                                        title="Modifier"
+                                                    >
+                                                        ✏️
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className="po-save-btn"
+                                                        onClick={() => handleSave(row)}
+                                                        disabled={isSaving}
+                                                        title="Enregistrer"
+                                                    >
+                                                        {isSaving ? '⏳' : '💾'}
+                                                    </button>
+                                                )}
                                                 <button
-                                                    className="po-edit-btn"
-                                                    onClick={() => handleEdit(rowId)}
-                                                    title="Modifier"
+                                                    className="po-delete-btn"
+                                                    onClick={() => handleDelete(row)}
+                                                    title="Supprimer"
                                                 >
-                                                    ✏️
+                                                    🗑️
                                                 </button>
-                                            ) : (
-                                                <button
-                                                    className="po-save-btn"
-                                                    onClick={() => handleSave(row)}
-                                                    disabled={isSaving}
-                                                    title="Enregistrer"
-                                                >
-                                                    {isSaving ? '⏳' : '💾'}
-                                                </button>
-                                            )}
-                                            <button
-                                                className="po-delete-btn"
-                                                onClick={() => handleDelete(row)}
-                                                title="Supprimer"
-                                            >
-                                                🗑️
-                                            </button>
-                                        </td>
+                                            </td>
+                                        )}
                                     </tr>
                                 );
                             })}

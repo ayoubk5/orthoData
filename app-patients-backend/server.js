@@ -2218,7 +2218,7 @@ const readProgramme = () => {
 };
 const writeProgramme = (rows) => fs.writeFileSync(PROGRAMME_FILE, JSON.stringify(rows, null, 2));
 
-app.get('/api/programme-operatoire', authenticateToken, requireAdmin, (req, res) => {
+app.get('/api/programme-operatoire', authenticateToken, (req, res) => {
     try {
         res.json({ success: true, rows: readProgramme() });
     } catch (e) {

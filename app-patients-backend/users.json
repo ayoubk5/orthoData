@@ -11,10 +11,10 @@
   {
     "id": 2,
     "username": "medecin",
-    "password": "$2b$10$iyjvjcPnxELKavkntj1V0ugTIkW8fkEMUJfknprnJCA5k3XxnvbZm",
+    "password": "$2b$10$V41jJqMuL.giAvGh3tXnM.sU17UGVHORYzbOaywCKRSxXeoKSvNZS",
     "role": "user",
     "fullName": "Dr. Medecin Test",
-    "forcePasswordChange": true,
+    "forcePasswordChange": false,
     "realPassword": "medecin123"
   },
   {

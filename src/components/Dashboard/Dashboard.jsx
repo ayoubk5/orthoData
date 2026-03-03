@@ -132,7 +132,7 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
               </button>
             )}
 
-            {user.role === 'admin' && (
+            {['admin', 'user'].includes(user.role) && (
               <button
                 className="card"
                 onClick={() => setActiveTab('programme')}
@@ -142,7 +142,7 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
               </button>
             )}
 
-            {['admin', 'user'].includes(user.role) && (
+            {user.role === 'admin' && (
               <button
                 className="card"
                 onClick={() => setActiveTab('medstats')}
@@ -260,9 +260,10 @@ const Dashboard = ({ user, onNavigate, onEditPatient }) => {
         />
       )}
 
-      {activeTab === 'programme' && user.role === 'admin' && (
+      {activeTab === 'programme' && ['admin', 'user'].includes(user.role) && (
         <ProgrammeOperatoire
           onBack={() => setActiveTab('home')}
+          user={user}
         />
       )}
 
