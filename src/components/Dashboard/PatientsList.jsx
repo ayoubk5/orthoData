@@ -88,6 +88,10 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
   const [error, setError] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
+  // --- PAGINATION ---
+  const ITEMS_PER_PAGE = 15;
+  const [currentPage, setCurrentPage] = useState(1);
+
   // --- ETAT POUR LA RECHERCHE AVANCÉE ---
   const [showAdvanced, setShowAdvanced] = useState(false);
 
@@ -420,6 +424,9 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
     }
   };
 
+  // Reset to page 1 whenever filters change
+  React.useEffect(() => { setCurrentPage(1); }, [search, selectedKeywords, selectedDiagnostics]);
+
   const filtered = patients.filter(p => {
     const s = search.toLowerCase();
 
@@ -683,7 +690,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
               </tr>
             </thead>
             <tbody>
-              {filtered.map((p, i) => (
+              {filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((p, i) => (
                 <tr key={i} className="patient-row">
                   <td className="cell-prenom">{p.prenom}</td>
                   <td className="cell-nom">{p.nom}</td>
@@ -778,6 +785,30 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
               ))}
             </tbody>
           </table>
+
+          {/* --- PAGINATION CONTROLS --- */}
+          {filtered.length > ITEMS_PER_PAGE && (
+            <div className="pagination-controls">
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                ‹ Précédent
+              </button>
+              <span className="pagination-info">
+                Page {currentPage} / {Math.ceil(filtered.length / ITEMS_PER_PAGE)}
+                <span className="pagination-total"> — {filtered.length} patient{filtered.length > 1 ? 's' : ''}</span>
+              </span>
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(p => Math.min(Math.ceil(filtered.length / ITEMS_PER_PAGE), p + 1))}
+                disabled={currentPage === Math.ceil(filtered.length / ITEMS_PER_PAGE)}
+              >
+                Suivant ›
+              </button>
+            </div>
+          )}
         </div>
       )}
 

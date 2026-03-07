@@ -14,7 +14,7 @@ cd ..
 echo Starting Frontend...
 start "OrthoData Frontend" npm run dev -- --host
 timeout /t 5 >nul
-start http://localhost/orthodata/
+start http://10.4.28.11:80/orthodata/
 
 echo.
 echo Application started!

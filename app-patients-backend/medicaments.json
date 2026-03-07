@@ -9,31 +9,32 @@
   {
     "category": "Anti-inflammatoires non stéroïdiens",
     "medicines": [
-      "STORIXIA 60 MG CP"
+      "ARIXIB 90 MG",
+      "VOLTARENE 50 MG CP"
     ]
   },
   {
     "category": "Antalgiques",
     "medicines": [
       "PARANTAL 1G CP",
-      "CO-PARANTAL 400MG/20MG",
+      "CEDOL CP",
       "MYANTALGIC 37.5MG/325MG",
       "TRAMADOL NORMON 50 MG GÉLULE",
       "ACETHIO",
-      "GABLINE 75 MG"
+      "LYRICA 75 MG"
     ]
   },
   {
     "category": "Antibiotiques",
     "medicines": [
-      "SPECTRUM 500 MG CP",
-      "IBERTIN 1G"
+      "CATEX 500 MG CP",
+      "LEVAMOX 1G"
     ]
   },
   {
     "category": "IPP",
     "medicines": [
-      "IXOR 20MG CP"
+      "OEDES 20MG CP"
     ]
   },
   {
@@ -42,12 +43,14 @@
   },
   {
     "category": "Gel anti douleur",
-    "medicines": []
+    "medicines": [
+      "NOCICEPTOL GEL"
+    ]
   },
   {
     "category": "Anti-arthrosiques",
     "medicines": [
-      "PIASCLEDINE 300 MG GÉLULE"
+      "FLEXIMAX GÉLULE"
     ]
   },
   {

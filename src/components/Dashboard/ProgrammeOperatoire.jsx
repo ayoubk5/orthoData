@@ -2,19 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { API_URL } from '../../config';
 import './ProgrammeOperatoire.css';
 
-const PROFS = ['Prof. YACOUBI', 'Prof. NAJIB', 'Prof. TEBAA'];
+const PROFS = ['Prof. YACOUBI', 'Prof. NAJIB', 'Prof. TEBBAA EL HASSALI'];
 
 // Days of the week highlighted in red for each prof (0=Sun,1=Mon,...,6=Sat)
 const PROF_DAYS = {
     'Prof. YACOUBI': [1, 3],  // Monday, Wednesday
     'Prof. NAJIB': [2, 4],  // Tuesday, Thursday
-    'Prof. TEBAA': [5],     // Friday
+    'Prof.TEBBAA EL HASSALI': [5],     // Friday
 };
 
 const PROF_COLORS = {
     'Prof. YACOUBI': '#6c5ce7',
     'Prof. NAJIB': '#0984e3',
-    'Prof. TEBAA': '#00b894',
+    'Prof. TEBBAA EL HASSALI': '#00b894',
 };
 
 const DAY_NAMES = ['Di', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'];
@@ -166,6 +166,10 @@ const ProgrammeOperatoire = ({ onBack, user }) => {
     const [profFilter, setProfFilter] = useState('');
     const [saving, setSaving] = useState(null); // row id being saved
 
+    // --- PAGINATION ---
+    const ITEMS_PER_PAGE = 15;
+    const [currentPage, setCurrentPage] = useState(1);
+
     const token = () => localStorage.getItem('token');
 
     const load = async () => {
@@ -280,6 +284,12 @@ const ProgrammeOperatoire = ({ onBack, user }) => {
         return matchSearch && matchProf;
     });
 
+    // Reset to page 1 when filters change
+    useEffect(() => { setCurrentPage(1); }, [search, profFilter]);
+
+    const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
+    const paginated = filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE);
+
     return (
         <div className="po-container">
             {/* Header */}
@@ -357,7 +367,7 @@ const ProgrammeOperatoire = ({ onBack, user }) => {
                                                 : 'Aucune entrée enregistrée.'}
                                     </td>
                                 </tr>
-                            ) : filtered.map(row => {
+                            ) : paginated.map(row => {
                                 const rowId = row.id ?? row._id;
                                 const locked = !row._editing;
                                 const isSaving = saving === rowId;
@@ -434,6 +444,30 @@ const ProgrammeOperatoire = ({ onBack, user }) => {
                             })}
                         </tbody>
                     </table>
+
+                    {/* --- PAGINATION CONTROLS --- */}
+                    {filtered.length > ITEMS_PER_PAGE && (
+                        <div className="pagination-controls">
+                            <button
+                                className="pagination-btn"
+                                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                                disabled={currentPage === 1}
+                            >
+                                ‹ Précédent
+                            </button>
+                            <span className="pagination-info">
+                                Page {currentPage} / {totalPages}
+                                <span className="pagination-total"> — {filtered.length} enregistrement{filtered.length > 1 ? 's' : ''}</span>
+                            </span>
+                            <button
+                                className="pagination-btn"
+                                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                                disabled={currentPage === totalPages}
+                            >
+                                Suivant ›
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
