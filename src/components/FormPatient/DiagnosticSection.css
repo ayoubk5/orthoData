@@ -14,14 +14,21 @@
 
 /* Conteneur de chaque ligne de diagnostic */
 .diag-entry {
-  display: flex; /* Active l'alignement horizontal */
-  align-items: center; /* Centre verticalement les éléments */
-  gap: 10px; /* Espace entre la date, le texte et le bouton */
-  margin-bottom: 10px; /* Espace sous chaque ligne */
-  background: #f8f9fa; /* Fond léger pour détacher la ligne (optionnel) */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  background: #f3f0ff;          /* soft purple tint */
+  border-left: 4px solid #7c3aed; /* purple accent left border */
   padding: 10px;
   border-radius: 8px;
+  transition: background 0.2s;
 }
+
+.diag-entry:hover {
+  background: #ede9fe;
+}
+
 
 /* Style de l'input date */
 .diag-entry input[type="date"] {

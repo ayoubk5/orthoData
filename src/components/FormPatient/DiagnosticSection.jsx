@@ -198,10 +198,10 @@ export default function Diagnostics({ diagnostics, onChange, onCreateAdmission, 
             gap: '12px',
             marginBottom: '8px',
             padding: '10px',
-            background: 'white',
+            background: '#ddd5fe',
             borderRadius: '8px',
-            border: '1px solid #eee',
-            boxShadow: '0 1px 3px rgba(0,0,0,0.05)'
+            borderLeft: '4px solid #7c3aed',
+            boxShadow: '0 1px 3px rgba(124,58,237,0.08)'
           }}>
             <div style={{
               fontWeight: '600',

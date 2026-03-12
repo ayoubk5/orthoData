@@ -50,7 +50,7 @@ const { generateGalleryHTML } = require('./galleryTemplate');
 const serveIndex = require('serve-index'); // Gardé si besoin en fallback ou supprimé si non utilisé
 
 // CONFIGURATION DU "FAUX" EXPLORATEUR WEB
-// Cela rend le dossier accessible via http://10.4.28.11:5000/explorer/
+// Cela rend le dossier accessible via http://localhost:5000/explorer/
 app.use('/explorer',
     express.static(PATIENTS_FOLDER), // Permet de télécharger/voir les fichiers
     (req, res, next) => {
@@ -363,18 +363,26 @@ app.post('/api/patients/create', authenticateToken, (req, res) => {
     try {
         const { nom, prenom, diagnostics, motsCles = [], ...rest } = req.body;
 
-        const nomPatient = `${prenom}_${nom}`;
-        const patientPath = path.join(PATIENTS_FOLDER, nomPatient);
+        const baseName = `${prenom}_${nom}`;
 
         console.log(`\n--- TENTATIVE DE CRÉATION DE DOSSIER ---`);
-        console.log(`Dossier Patient Cible: ${patientPath}`);
 
         if (!fs.existsSync(PATIENTS_FOLDER)) {
             fs.mkdirSync(PATIENTS_FOLDER, { recursive: true });
         }
-        if (!fs.existsSync(patientPath)) {
-            fs.mkdirSync(patientPath);
+
+        // 🔥 AUTO-NUMBERING : trouver un nom de dossier unique
+        let nomPatient = baseName;
+        let counter = 1;
+        while (fs.existsSync(path.join(PATIENTS_FOLDER, nomPatient))) {
+            nomPatient = `${baseName}(${counter})`;
+            counter++;
         }
+
+        const patientPath = path.join(PATIENTS_FOLDER, nomPatient);
+        console.log(`Dossier Patient Cible: ${patientPath}`);
+
+        fs.mkdirSync(patientPath);
 
         const dossiersPrincipaux = [
             "Images cliniques",
@@ -614,7 +622,8 @@ app.get('/api/patients', authenticateToken, (req, res) => {
                             }
                         } else if (!isInMotsClesSection) {
                             // Parser les autres champs
-                            if (line.includes('Nom:')) patientData.nom = line.split('Nom:')[1].trim();
+                            // ⚠️ Utiliser un match strict pour éviter que "Nom Opération:" ne devienne le nom du patient
+                            if (/^Nom:\s/.test(line.trim())) patientData.nom = line.split('Nom:')[1].trim();
                             if (line.includes('Prénom:')) patientData.prenom = line.split('Prénom:')[1].trim();
                             if (line.includes('N° Dossier:')) patientData.nDossier = line.split('N° Dossier:')[1].trim();
                             if (line.includes('Hôpital:')) patientData.hopital = line.split('Hôpital:')[1].trim();
@@ -651,6 +660,8 @@ app.get('/api/patients', authenticateToken, (req, res) => {
                     // 🔥 AJOUT : Date de création du dossier (pour le tri)
                     const folderStats = fs.statSync(path.join(PATIENTS_FOLDER, patientFolder));
                     patientData.createdAt = folderStats.birthtime;
+                    // 🔥 AJOUT : nom réel du dossier sur le disque (peut avoir un suffixe comme (1))
+                    patientData.folderName = patientFolder;
 
                     patientsList.push(patientData);
                 } catch (e) {
@@ -1318,7 +1329,7 @@ app.post('/api/open-folder', authenticateToken, (req, res) => {
 
         // Configuration de l'IP du serveur (À modifier si votre IP change)
         // C'est ce chemin que les PC distants utiliseront
-        const serverIP = '10.4.28.11';
+        const serverIP = 'localhost';
         const networkSharePath = `\\\\${serverIP}\\Patients`;
 
         // Construction des chemins
@@ -2287,7 +2298,7 @@ app.delete('/api/programme-operatoire/:id', authenticateToken, requireAdmin, (re
 app.listen(PORT, '0.0.0.0', () => {
     initializeUsersFile();
     console.log(`\n========================================================`);
-    console.log(`🚀 Serveur démarré sur http://10.4.28.11:${PORT}`);
+    console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
     console.log(`🔐 Système d'authentification activé`);
     console.log(`📁 Dossier racine Patients: ${PATIENTS_FOLDER}`);
     console.log(`📄 Template Word: ${TEMPLATE_PATH}`);

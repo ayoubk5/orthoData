@@ -79,7 +79,8 @@ const FormPatient = ({ mode = 'create', initialData = null, onBack, user }) => {
             });
             setIsCreated(true);
 
-            const folderName = `${initialData.prenom}_${initialData.nom}`;
+            // 🔥 Utiliser le nom réel du dossier (peut avoir un suffixe (1), (2) si doublon)
+            const folderName = initialData.folderName || `${initialData.prenom}_${initialData.nom}`;
             setCreatedFolder(folderName);
             setOriginalPatientName(`${initialData.nom} ${initialData.prenom}`);
 
