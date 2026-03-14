@@ -671,6 +671,13 @@ function generateGalleryHTML(urlPath, localPath) {
             min-width: 48px;
             text-align: center;
         }
+        .lb-separator {
+            width: 1px;
+            height: 28px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 1px;
+            margin: 0 4px;
+        }
 
         /* ── SEARCH FILTER ── */
         .filter-bar {
@@ -862,6 +869,10 @@ function generateGalleryHTML(urlPath, localPath) {
         <span class="zoom-level" id="zoom-label">100%</span>
         <button class="zoom-btn" onclick="resetZoom()" title="Réinitialiser">⟳</button>
         <button class="zoom-btn" onclick="zoomIn()" title="Zoom +">+</button>
+        <div class="lb-separator"></div>
+        <button class="zoom-btn" onclick="rotateLeft()" title="Rotation gauche ([ )">↺</button>
+        <span class="zoom-level" id="rotate-label">0°</span>
+        <button class="zoom-btn" onclick="rotateRight()" title="Rotation droite (])">↻</button>
     </div>
 </div>
 
@@ -870,9 +881,11 @@ function generateGalleryHTML(urlPath, localPath) {
     let currentIndex = -1;
     let isPdfMode = false;
     let currentZoom = 1;
+    let currentRotation = 0;
     let tx = 0, ty = 0;
     let isDragging = false, startX, startY;
     const ZOOM_STEP = 0.25, MIN_ZOOM = 0.5, MAX_ZOOM = 5;
+    const ROTATE_STEP = 90;
 
     // ── THEME TOGGLE ──
     (function initTheme() {
@@ -928,7 +941,7 @@ function generateGalleryHTML(urlPath, localPath) {
         document.body.style.overflow = 'hidden';
         const isImg = mediaItems[idx].type === 'image';
         document.getElementById('lb-bottom').style.display = isImg ? 'flex' : 'none';
-        resetZoom();
+        resetTransform();
     }
 
     function openPdfPreview(url) {
@@ -952,12 +965,13 @@ function generateGalleryHTML(urlPath, localPath) {
         document.getElementById('lb-prev').style.display = '';
         document.getElementById('lb-next').style.display = '';
         currentIndex = -1;
+        currentRotation = 0;
     }
 
     function changeImage(dir) {
         if (isPdfMode || currentIndex === -1) return;
         currentIndex = (currentIndex + dir + mediaItems.length) % mediaItems.length;
-        resetZoom();
+        resetTransform();
         updateLightbox();
         const isImg = mediaItems[currentIndex].type === 'image';
         document.getElementById('lb-bottom').style.display = isImg ? 'flex' : 'none';
@@ -976,17 +990,23 @@ function generateGalleryHTML(urlPath, localPath) {
     }
 
     // ── ZOOM ──
-    function zoomIn()    { if (currentZoom < MAX_ZOOM) { currentZoom += ZOOM_STEP; applyZoom(); } }
-    function zoomOut()   { if (currentZoom > MIN_ZOOM) { currentZoom -= ZOOM_STEP; applyZoom(); } }
-    function resetZoom() { currentZoom = 1; tx = 0; ty = 0; applyZoom(); }
+    function zoomIn()     { if (currentZoom < MAX_ZOOM) { currentZoom += ZOOM_STEP; applyTransform(); } }
+    function zoomOut()    { if (currentZoom > MIN_ZOOM) { currentZoom -= ZOOM_STEP; applyTransform(); } }
+    function resetZoom()  { currentZoom = 1; tx = 0; ty = 0; applyTransform(); }
+    function resetTransform() { currentZoom = 1; currentRotation = 0; tx = 0; ty = 0; applyTransform(); }
 
-    function applyZoom() {
+    // ── ROTATION ──
+    function rotateLeft()  { currentRotation = (currentRotation - ROTATE_STEP + 360) % 360; applyTransform(); }
+    function rotateRight() { currentRotation = (currentRotation + ROTATE_STEP) % 360; applyTransform(); }
+
+    function applyTransform() {
         const img = document.querySelector('.lightbox-media');
         if (img && img.tagName === 'IMG') {
-            img.style.transform = \`translate(\${tx}px, \${ty}px) scale(\${currentZoom})\`;
+            img.style.transform = \`translate(\${tx}px, \${ty}px) scale(\${currentZoom}) rotate(\${currentRotation}deg)\`;
             img.style.cursor = currentZoom > 1 ? 'grab' : 'default';
         }
         document.getElementById('zoom-label').textContent = Math.round(currentZoom * 100) + '%';
+        document.getElementById('rotate-label').textContent = currentRotation + '°';
     }
 
     // ── DRAG TO PAN ──
@@ -1002,7 +1022,7 @@ function generateGalleryHTML(urlPath, localPath) {
         tx = e.clientX - startX;
         ty = e.clientY - startY;
         const img = document.querySelector('.lightbox-media');
-        if (img) img.style.transform = \`translate(\${tx}px, \${ty}px) scale(\${currentZoom})\`;
+        if (img) img.style.transform = \`translate(\${tx}px, \${ty}px) scale(\${currentZoom}) rotate(\${currentRotation}deg)\`;
     });
     window.addEventListener('mouseup', () => { isDragging = false; });
 
@@ -1016,6 +1036,8 @@ function generateGalleryHTML(urlPath, localPath) {
             if (e.key === '+' || e.key === '=') zoomIn();
             if (e.key === '-') zoomOut();
             if (e.key === '0') resetZoom();
+            if (e.key === '[') rotateLeft();
+            if (e.key === ']') rotateRight();
         }
     });
 
