@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CertificateModal.css';
+import { API_URL } from '../../config';
 
 // Liste des chirurgiens
 const SURGEONS_LIST = [
@@ -64,8 +65,8 @@ const CertificateModal = ({ isOpen, onClose }) => {
     setError('');
 
     // Validation
-    if (!formData.chirurgien || !formData.nom_complet || !formData.cin || 
-        !formData.diagnostic || !formData.traitement || !formData.nombre) {
+    if (!formData.chirurgien || !formData.nom_complet || !formData.cin ||
+      !formData.diagnostic || !formData.traitement || !formData.nombre) {
       setError('Tous les champs sont obligatoires');
       return;
     }
@@ -74,7 +75,7 @@ const CertificateModal = ({ isOpen, onClose }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://10.4.28.11:5000/api/generate-certificate', {
+      const res = await fetch(`${API_URL}/api/generate-certificate`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

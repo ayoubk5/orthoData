@@ -2,7 +2,7 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-const API_URL = 'http://10.4.28.11:5000/api';
+const API_URL = 'http://localhost:5000/api';
 const USERNAME = 'admin';
 const PASSWORD = 'admin123';
 

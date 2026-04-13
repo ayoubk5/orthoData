@@ -12,4 +12,4 @@ WshShell.Run "cmd /c npm run dev -- --host", 0, False
 
 ' 3. Open Browser after 5 seconds
 WScript.Sleep 5000
-WshShell.Run "http://10.4.28.11:80/orthodata/"
+WshShell.Run "http://localhost:80/orthodata/"

@@ -3,6 +3,7 @@ import { Filter, X, Search } from 'lucide-react';
 import './PatientsList.css';
 import { MOCK_KEYWORDS } from '../../constants/keywords';
 import DiagnosticAutocomplete from '../Shared/DiagnosticAutocomplete';
+import { API_URL } from '../../config';
 
 // =======================================================
 // Composant interne pour afficher les détails du patient
@@ -81,11 +82,24 @@ const PatientDetailsModal = ({ patient, onClose, onGenerate }) => {
 // =======================================================
 // Composant Principal
 // =======================================================
+// Extrait le suffixe (1), (2)... du nom réel du dossier pour l'afficher dans l'UI
+const getFolderSuffix = (patient) => {
+  const baseName = `${patient.prenom}_${patient.nom}`;
+  const folder = patient.folderName || baseName;
+  if (folder === baseName) return '';
+  const suffix = folder.slice(baseName.length); // ex: "(1)"
+  return suffix.match(/^\(\d+\)$/) ? suffix : '';
+};
+
 const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatient }) => {
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState(null);
   const [error, setError] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+
+  // --- PAGINATION ---
+  const ITEMS_PER_PAGE = 15;
+  const [currentPage, setCurrentPage] = useState(1);
 
   // --- ETAT POUR LA RECHERCHE AVANCÉE ---
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -146,16 +160,16 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
 
   // --- FONCTION 1 : OUVRIR LE DOSSIER WINDOWS ---
   const handleOpenFolder = async (patient) => {
-    const folderName = `${patient.prenom}_${patient.nom}`;
+    const folderName = patient.folderName || `${patient.prenom}_${patient.nom}`;
     const safeFolderName = encodeURIComponent(folderName);
-    const explorerUrl = `http://10.4.28.11:5000/explorer/${safeFolderName}/`;
+    const explorerUrl = `${API_URL}/explorer/${safeFolderName}/`;
     try {
       const token = localStorage.getItem('token');
       // On sécurise le nom du dossier comme dans le backend
-      const folderName = `${patient.prenom}_${patient.nom}`;
+      const folderName = patient.folderName || `${patient.prenom}_${patient.nom}`;
       console.log("📂 Tentative récupération chemin:", folderName);
 
-      const res = await fetch('http://10.4.28.11:5000/api/open-folder', {
+      const res = await fetch(`${API_URL}/api/open-folder`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -229,7 +243,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const token = localStorage.getItem('token');
       console.log("📄 Demande de génération du document...");
 
-      const res = await fetch('http://10.4.28.11:5000/api/generate-document', {
+      const res = await fetch(`${API_URL}/api/generate-document`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -280,7 +294,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       const token = localStorage.getItem('token');
       console.log("📄 Demande de génération SP pour:", selectedSPPatient.nom);
 
-      const res = await fetch('http://10.4.28.11:5000/api/generate-sortie-provisoire', {
+      const res = await fetch(`${API_URL}/api/generate-sortie-provisoire`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -326,9 +340,9 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
 
     try {
       const token = localStorage.getItem('token');
-      const folderName = `${patientToDelete.prenom}_${patientToDelete.nom}`;
+      const folderName = patientToDelete.folderName || `${patientToDelete.prenom}_${patientToDelete.nom}`;
 
-      const res = await fetch(`http://10.4.28.11:5000/api/patients/${folderName}`, {
+      const res = await fetch(`${API_URL}/api/patients/${folderName}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -353,10 +367,10 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
 
   const handleDownloadZip = async (patient) => {
     try {
-      const folderName = `${patient.prenom}_${patient.nom}`;
+      const folderName = patient.folderName || `${patient.prenom}_${patient.nom}`;
       const token = localStorage.getItem('token');
 
-      const res = await fetch(`http://10.4.28.11:5000/api/download-folder?folderName=${folderName}`, {
+      const res = await fetch(`${API_URL}/api/download-folder?folderName=${folderName}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -382,10 +396,10 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
 
   const handleDownloadLastCR = async (patient) => {
     try {
-      const folderName = `${patient.prenom}_${patient.nom}`;
+      const folderName = patient.folderName || `${patient.prenom}_${patient.nom}`;
       const token = localStorage.getItem('token');
 
-      const res = await fetch(`http://10.4.28.11:5000/api/download-last-cr?folderName=${folderName}`, {
+      const res = await fetch(`${API_URL}/api/download-last-cr?folderName=${folderName}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
 
@@ -418,6 +432,9 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
       alert("Erreur réseau");
     }
   };
+
+  // Reset to page 1 whenever filters change
+  React.useEffect(() => { setCurrentPage(1); }, [search, selectedKeywords, selectedDiagnostics]);
 
   const filtered = patients.filter(p => {
     const s = search.toLowerCase();
@@ -468,7 +485,7 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
           <div className="search-wrapper">
             <input
               className="search-input"
-              placeholder="🔍 Rechercher (Nom, Dossier, Chirurgien)..."
+              placeholder=" Rechercher (Nom, Dossier, Chirurgien)..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
@@ -682,10 +699,17 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
               </tr>
             </thead>
             <tbody>
-              {filtered.map((p, i) => (
+              {filtered.slice((currentPage - 1) * ITEMS_PER_PAGE, currentPage * ITEMS_PER_PAGE).map((p, i) => (
                 <tr key={i} className="patient-row">
                   <td className="cell-prenom">{p.prenom}</td>
-                  <td className="cell-nom">{p.nom}</td>
+                  <td className="cell-nom">
+                    {p.nom}
+                    {getFolderSuffix(p) && (
+                      <span style={{ marginLeft: '6px', fontSize: '11px', fontWeight: 'bold', color: '#fff', background: '#e67e22', borderRadius: '10px', padding: '1px 6px', verticalAlign: 'middle' }}>
+                        {getFolderSuffix(p)}
+                      </span>
+                    )}
+                  </td>
                   <td className="cell-dossier">
                     <span className="badge-dossier">#{p.nDossier}</span>
                   </td>
@@ -777,6 +801,30 @@ const PatientsList = ({ patients, loading, onRefresh, onBack, user, onEditPatien
               ))}
             </tbody>
           </table>
+
+          {/* --- PAGINATION CONTROLS --- */}
+          {filtered.length > ITEMS_PER_PAGE && (
+            <div className="pagination-controls">
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={currentPage === 1}
+              >
+                ‹ Précédent
+              </button>
+              <span className="pagination-info">
+                Page {currentPage} / {Math.ceil(filtered.length / ITEMS_PER_PAGE)}
+                <span className="pagination-total"> — {filtered.length} patient{filtered.length > 1 ? 's' : ''}</span>
+              </span>
+              <button
+                className="pagination-btn"
+                onClick={() => setCurrentPage(p => Math.min(Math.ceil(filtered.length / ITEMS_PER_PAGE), p + 1))}
+                disabled={currentPage === Math.ceil(filtered.length / ITEMS_PER_PAGE)}
+              >
+                Suivant ›
+              </button>
+            </div>
+          )}
         </div>
       )}
 

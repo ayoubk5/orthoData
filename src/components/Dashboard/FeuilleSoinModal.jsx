@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './CertificateModal.css'; // Reuse styles for consistency
+import { API_URL } from '../../config';
 
 const FeuilleSoinModal = ({ isOpen, onClose }) => {
     const [loading, setLoading] = useState(false);
@@ -11,7 +12,7 @@ const FeuilleSoinModal = ({ isOpen, onClose }) => {
 
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch(`http://10.4.28.11:5000/api/generate-feuille-soin?type=${type}`, {
+            const res = await fetch(`${API_URL}/api/generate-feuille-soin?type=${type}`, {
                 method: 'GET',
                 headers: {
                     Authorization: `Bearer ${token}`

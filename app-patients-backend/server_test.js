@@ -2130,7 +2130,7 @@ app.post('/api/generate-ordonnance', authenticateToken, async (req, res) => {
 app.listen(PORT, () => {
     initializeUsersFile();
     console.log(`\n========================================================`);
-    console.log(`🚀 Serveur démarré sur http://10.4.28.11:${PORT}`);
+    console.log(`🚀 Serveur démarré sur http://localhost:${PORT}`);
     console.log(`🔐 Système d'authentification activé`);
     console.log(`📁 Dossier racine Patients: ${PATIENTS_FOLDER}`);
     console.log(`📄 Template Word: ${TEMPLATE_PATH}`);

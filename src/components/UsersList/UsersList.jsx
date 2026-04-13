@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import './UsersList.css';
+import { API_URL } from '../../config';
 
 const UsersList = ({ users, loading, onRefresh, onBack }) => {
   const [showAdd, setShowAdd] = useState(false);
-  const [form, setForm] = useState({ username:'', password:'', fullName:'', role:'user' });
+  const [form, setForm] = useState({ username: '', password: '', fullName: '', role: 'user' });
   const [error, setError] = useState(null);
   const [deleteConfirmation, setDeleteConfirmation] = useState(null); // { id: 1, username: 'admin' }
 
   // Gère les changements du formulaire d'ajout d'utilisateur
-  const handleChange = (e) => setForm(prev=>({...prev,[e.target.name]: e.target.value}));
+  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
 
   // Soumission du formulaire d'ajout
   const handleSubmit = async (e) => {
@@ -16,21 +17,21 @@ const UsersList = ({ users, loading, onRefresh, onBack }) => {
     setError(null);
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch('http://10.4.28.11:5000/api/users/create', { 
-        method:'POST', 
-        headers:{ 'Content-Type':'application/json', Authorization:`Bearer ${token}` }, 
+      const res = await fetch(`${API_URL}/api/users/create`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify(form)
       });
       const data = await res.json();
-      
-      if (data.success){ 
-        setForm({username:'',password:'',fullName:'',role:'user'}); 
-        setShowAdd(false); 
-        onRefresh(); 
+
+      if (data.success) {
+        setForm({ username: '', password: '', fullName: '', role: 'user' });
+        setShowAdd(false);
+        onRefresh();
       } else {
         setError(data.error || "Erreur lors de la création de l'utilisateur.");
       }
-    } catch(e){ 
+    } catch (e) {
       setError('Erreur réseau. Impossible de contacter le serveur.');
     }
   };
@@ -39,21 +40,21 @@ const UsersList = ({ users, loading, onRefresh, onBack }) => {
   const handleDelete = async (id, username) => {
     setDeleteConfirmation(null); // Réinitialiser la confirmation
     setError(null);
-    
+
     try {
       const token = localStorage.getItem('token');
-      const res = await fetch(`http://10.4.28.11:5000/api/users/${id}`, { 
-        method:'DELETE', 
-        headers:{ Authorization:`Bearer ${token}` }
+      const res = await fetch(`${API_URL}/api/users/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` }
       });
       const data = await res.json();
-      
+
       if (data.success) {
         onRefresh();
       } else {
         setError(data.error || "Erreur lors de la suppression de l'utilisateur.");
       }
-    } catch(e){ 
+    } catch (e) {
       setError('Erreur réseau lors de la suppression.');
     }
   };
@@ -63,15 +64,15 @@ const UsersList = ({ users, loading, onRefresh, onBack }) => {
   return (
     <div className="users-section">
       <button className="back-button" onClick={onBack}>← Retour</button>
-      
+
       <div className="section-header">
         <h2>👥 Gestion des utilisateurs</h2>
         <div className="section-actions">
           <button className="refresh-button" onClick={onRefresh} title="Actualiser la liste">🔄</button>
-          <button className="add-user-button" onClick={()=>setShowAdd(s=>!s)}>{showAdd ? 'Annuler' : '➕ Ajouter'}</button>
+          <button className="add-user-button" onClick={() => setShowAdd(s => !s)}>{showAdd ? 'Annuler' : '➕ Ajouter'}</button>
         </div>
       </div>
-      
+
       {error && <div className="error-message danger">{error}</div>}
 
       {/* Formulaire d'ajout d'utilisateur */}
@@ -95,8 +96,8 @@ const UsersList = ({ users, loading, onRefresh, onBack }) => {
             <p>Voulez-vous vraiment supprimer l'utilisateur <strong>{deleteConfirmation.username}</strong> ?</p>
             <div className="modal-actions">
               <button className="button-cancel" onClick={() => setDeleteConfirmation(null)}>Annuler</button>
-              <button 
-                className="button-delete" 
+              <button
+                className="button-delete"
                 onClick={() => handleDelete(deleteConfirmation.id, deleteConfirmation.username)}
               >
                 Confirmer la suppression
@@ -120,9 +121,9 @@ const UsersList = ({ users, loading, onRefresh, onBack }) => {
               </div>
               <div className="user-actions">
                 {/* On déclenche la modale de confirmation ici */}
-                <button 
-                  className="action-btn delete-btn" 
-                  title={`Supprimer ${u.username}`} 
+                <button
+                  className="action-btn delete-btn"
+                  title={`Supprimer ${u.username}`}
                   onClick={() => setDeleteConfirmation({ id: u.id, username: u.username })}
                 >
                   🗑

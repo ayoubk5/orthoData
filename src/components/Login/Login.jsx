@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import ChangePasswordModal from './ChangePasswordModal';
+import { API_URL } from '../../config';
 
 const Login = ({ onLogin }) => {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ const Login = ({ onLogin }) => {
     setError('');
     try {
       // Règle importante: Remplacer alert() par un affichage UI
-      const res = await fetch('http://10.4.28.11:5000/api/auth/login', {
+      const res = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username, password })
@@ -46,7 +47,7 @@ const Login = ({ onLogin }) => {
 
   const handleChangePassword = async (newPassword) => {
     try {
-      const res = await fetch('http://10.4.28.11:5000/api/auth/change-password', {
+      const res = await fetch(`${API_URL}/api/auth/change-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MedicamentManager.css';
+import { API_URL } from '../../config';
 
 const MedicamentManager = ({ onBack }) => {
     const [medicaments, setMedicaments] = useState([]);
@@ -14,7 +15,7 @@ const MedicamentManager = ({ onBack }) => {
     const loadMedicaments = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://10.4.28.11:5000/api/medicaments', {
+            const res = await fetch(`${API_URL}/api/medicaments`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await res.json();
@@ -29,16 +30,16 @@ const MedicamentManager = ({ onBack }) => {
     };
 
     const handleInputChange = (category, value) => {
-        setInputs(prev => ({ ...prev, [category]: value }));
+        setInputs(prev => ({ ...prev, [category]: value.toUpperCase() }));
     };
 
     const submitAdd = async (category) => {
-        const name = inputs[category];
-        if (!name || !name.trim()) return;
+        const name = (inputs[category] || '').trim().toUpperCase();
+        if (!name) return;
 
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://10.4.28.11:5000/api/medicaments/add', {
+            const res = await fetch(`${API_URL}/api/medicaments/add`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -62,7 +63,7 @@ const MedicamentManager = ({ onBack }) => {
         if (!window.confirm(`Supprimer ${name} ?`)) return;
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://10.4.28.11:5000/api/medicaments/delete', {
+            const res = await fetch(`${API_URL}/api/medicaments/delete`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -89,9 +90,10 @@ const MedicamentManager = ({ onBack }) => {
 
     const saveEdit = async () => {
         if (!editingItem || !editingItem.newName.trim()) return;
+        const uppercasedNewName = editingItem.newName.trim().toUpperCase();
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://10.4.28.11:5000/api/medicaments/update', {
+            const res = await fetch(`${API_URL}/api/medicaments/update`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,7 +102,7 @@ const MedicamentManager = ({ onBack }) => {
                 body: JSON.stringify({
                     category: editingItem.category,
                     oldName: editingItem.oldName,
-                    newName: editingItem.newName
+                    newName: uppercasedNewName
                 })
             });
             const data = await res.json();
@@ -147,7 +149,7 @@ const MedicamentManager = ({ onBack }) => {
                                             <input
                                                 className="edit-input"
                                                 value={editingItem.newName}
-                                                onChange={(e) => setEditingItem({ ...editingItem, newName: e.target.value })}
+                                                onChange={(e) => setEditingItem({ ...editingItem, newName: e.target.value.toUpperCase() })}
                                                 autoFocus
                                             />
                                             <button onClick={saveEdit} className="save-btn">✔</button>

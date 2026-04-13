@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './OrdonnanceModal.css';
+import { API_URL } from '../../config';
 
 const OrdonnanceModal = ({ isOpen, onClose }) => {
     const [patientData, setPatientData] = useState({
@@ -39,7 +40,7 @@ const OrdonnanceModal = ({ isOpen, onClose }) => {
     const loadMedicaments = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://10.4.28.11:5000/api/medicaments', {
+            const res = await fetch(`${API_URL}/api/medicaments`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             const data = await res.json();
@@ -87,7 +88,7 @@ const OrdonnanceModal = ({ isOpen, onClose }) => {
         setIsLoading(true);
         try {
             const token = localStorage.getItem('token');
-            const res = await fetch('http://10.4.28.11:5000/api/generate-ordonnance', {
+            const res = await fetch(`${API_URL}/api/generate-ordonnance`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
